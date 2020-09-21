@@ -7,3 +7,6 @@
 [submodule "ansible-role-docker"]
 	path = ansible-role-docker
 	url = git@github.com:totaldebug/ansible-role-docker.git
+[submodule "roles/ansible-role-docker"]
+	path = roles/ansible-role-docker
+	url = git@github.com:totaldebug/ansible-role-docker.git
