@@ -1,0 +1,57 @@
+---
+
+- name: install updates (CentOS)
+  tags: always
+  dnf:
+    update_only: yes
+    update_cache: yes
+  when: ansible_distribution == "CentOS"
+ 
+- name: install updates (Ubuntu)
+  tags: always
+  apt:
+    upgrade: dist
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: create ansible user
+  tags: always
+  user:
+    name: {{ base_ansible_user }}
+    groups: root
+
+- name: add ssh key for ansible user
+  authorized_key:
+    user: {{ base_ansible_user }}
+    key: {{ base_ansible_pubkey }}
+
+- name: add sudoers file for ansible user
+  tags: always
+  template:
+    src: sudoer_ansible
+    dest: /etc/sudoers.d/sudoer_ansible
+    owner: root
+    group: root
+    mode: 0440
+
+- name: generate sshd_config file from template
+  tags: ssh
+  template:
+    src: sshd_config_ubuntu.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart_sshd
+  when: ansible_distribution == "Ubuntu"
+
+- name: generate sshd_config file from template
+  tags: ssh
+  template:
+    src: sshd_config_centos.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart_sshd
+  when: ansible_distribution == "CentOS"

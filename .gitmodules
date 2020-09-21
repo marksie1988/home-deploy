@@ -1,0 +1,9 @@
+[submodule "roles/ansible-motd"]
+	path = roles/ansible-motd
+	url = git@github.com:totaldebug/ansible-motd.git
+[submodule "roles/ansible-hassio"]
+	path = roles/ansible-hassio
+	url = https://github.com/totaldebug/ansible-hassio
+[submodule "ansible-role-docker"]
+	path = ansible-role-docker
+	url = git@github.com:totaldebug/ansible-role-docker.git

@@ -1,0 +1,8 @@
+---
+
+- hosts: hassio
+  roles:
+    - base
+    - ansible-motd
+    - ansible-role-docker
+    - ansible-hassio

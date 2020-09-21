@@ -1,0 +1,5 @@
+---
+
+base_ansible_user: ansible
+base_ansible_pubkey: ssh- *****
+base_ssh_template_file: 
