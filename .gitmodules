@@ -1,12 +1,15 @@
-[submodule "roles/ansible-motd"]
-	path = roles/ansible-motd
-	url = git@github.com:totaldebug/ansible-motd.git
-[submodule "roles/ansible-hassio"]
-	path = roles/ansible-hassio
-	url = https://github.com/totaldebug/ansible-hassio
-[submodule "ansible-role-docker"]
-	path = ansible-role-docker
+[submodule "roles/security"]
+	path = roles/security
+	url = git@github.com:totaldebug/ansible-role-security.git
+[submodule "roles/hassio"]
+	path = roles/hassio
+	url = git@github.com:totaldebug/ansible-role-hassio.git
+[submodule "roles/motd"]
+	path = roles/motd
+	url = git@github.com:totaldebug/ansible-role-motd.git
+[submodule "roles/docker"]
+	path = roles/docker
 	url = git@github.com:totaldebug/ansible-role-docker.git
-[submodule "roles/ansible-role-docker"]
-	path = roles/ansible-role-docker
-	url = git@github.com:totaldebug/ansible-role-docker.git
+[submodule "roles/webhook"]
+	path = roles/webhook
+	url = git@github.com:totaldebug/ansible-role-webhook.git
