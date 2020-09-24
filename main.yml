@@ -1,0 +1,9 @@
+---
+
+- name: Configure all servers. 
+  hosts: all
+  become: yes
+  roles: 
+    - security
+
+- import_playbook: hassio.yml

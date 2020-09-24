@@ -6,3 +6,12 @@
     - ansible-motd
     - ansible-role-docker
     - ansible-hassio
+---
+
+- hosts: hassio
+  become: yes
+  roles: 
+    - motd
+    - docker
+    - hassio
+    - webhook

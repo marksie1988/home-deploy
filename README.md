@@ -9,14 +9,40 @@
 # Ansible Deployment
 
 ## Server Setup
+I recommend using Ubuntu for the Ansible server 
+
+
+### Ansible Install
+
+```
+sudo apt update
+sudo apt install software-properties-common
+sudo apt-add-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible
+```
+
+### Setup Ansible User & Create SSH Key
+
+```
+sudo adduser <ansible-user>
+sudo usermod -aG sudo <ansible-user>
+```
+
+Login as the ansible user and create SSH Key. 
+
+```
+ssh-keygen -t ed25519 -C "Ansible User"
+```
 
 ### Download Deploy Repo
 
 ```
- yum install -y git
+ sudo apt install -y git
  git clone git@github.com:totaldebug/home-deploy.git
  cd ~/home-deploy
 ```
+
+copy the `id_ed25519.pub` file to the templates folder and rename it `ansible_user.pub`
 
 ### Install WebHook
 
@@ -47,16 +73,3 @@ Open Firewall Port:
  sudo ufw reload
 ```
 
-### Ansible Install
-
-Add the following to `/etc/apt/sources.list`
-
-`deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main`
-
-```
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
-sudo apt update
-sudo apt install ansible
-```
-
-### Setup Ansible User

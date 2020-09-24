@@ -1,0 +1,13 @@
+---
+# This playbook is used when first deploying a new server, 
+# it will deploy the required files for ansible login
+
+- hosts: all
+  become: true
+  pre_tasks: 
+  
+  - name: Grant ansible access to server
+    authorized_key: 
+      user: {{ ansible_user }}
+      state: present
+      key: "{{ lookup('file', 'templates/ansible_user.pub') }}"
