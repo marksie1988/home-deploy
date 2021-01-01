@@ -9,7 +9,7 @@
 # Ansible Deployment
 
 ## Server Setup
-I recommend using Ubuntu for the Ansible server 
+I recommend using Ubuntu for the Ansible server
 
 
 ### Ansible Install
@@ -28,7 +28,7 @@ sudo adduser <ansible-user>
 sudo usermod -aG sudo <ansible-user>
 ```
 
-Login as the ansible user and create SSH Key. 
+Login as the ansible user and create SSH Key.
 
 ```
 ssh-keygen -t ed25519 -C "Ansible User"
@@ -50,7 +50,7 @@ copy the `id_ed25519.pub` file to the templates folder and rename it `ansible_us
  sudo apt install webhook
 ```
 
-Configure Webhook: 
+Configure Webhook:
 
 ```
  cp .stubs/webhook/webhook.json /etc/webhook.json
@@ -66,10 +66,23 @@ Enable & Start Services:
  systemctl start webhook
 ```
 
-Open Firewall Port: 
+Open Firewall Port:
 
-``` 
+```
  sudo ufw allow 9000/tcp
  sudo ufw reload
 ```
 
+## Client Deployment
+
+### Client Setup
+
+On the Ansible server from the repo directory run the below command:
+```
+ansible-playbook authorized_keys.yml --ask-pass --limit <server-group>
+```
+
+To limit to a specific group of hosts:
+```
+ansible-playbook authorized_keys.yml --ask-pass --limit <host-group>
+```
