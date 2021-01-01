@@ -13,3 +13,6 @@
 [submodule "roles/webhook"]
 	path = roles/webhook
 	url = git@github.com:totaldebug/ansible-role-webhook.git
+[submodule "roles/deluge"]
+	path = roles/deluge
+	url = git@github.com:totaldebug/ansible-role-deluge.git
