@@ -79,7 +79,7 @@ Open Firewall Port:
 
 On the Ansible server from the repo directory run the below command:
 ```
-ansible-playbook authorized_keys.yml --ask-pass --limit <server-group>
+ansible-playbook authorized_keys.yml --ask-pass
 ```
 
 To limit to a specific group of hosts:
