@@ -6,7 +6,7 @@
     update_only: yes
     update_cache: yes
   when: ansible_distribution == "CentOS"
- 
+
 - name: install updates (Ubuntu)
   tags: always
   apt:
@@ -17,13 +17,13 @@
 - name: create ansible user
   tags: always
   user:
-    name: {{ base_ansible_user }}
+    name: "{{ base_ansible_user }}"
     groups: root
 
 - name: add ssh key for ansible user
   authorized_key:
-    user: {{ base_ansible_user }}
-    key: {{ base_ansible_pubkey }}
+    user: "{{ base_ansible_user }}"
+    key: "{{ base_ansible_pubkey }}"
 
 - name: add sudoers file for ansible user
   tags: always
