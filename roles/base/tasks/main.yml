@@ -25,6 +25,7 @@
     group: root
     mode: 0644
   notify: restart_sshd
+  become: true
   when: ansible_distribution == "Ubuntu"
 
 - name: generate sshd_config file from template
@@ -36,4 +37,5 @@
     group: root
     mode: 0644
   notify: restart_sshd
+  become: true
   when: ansible_distribution == "CentOS"
