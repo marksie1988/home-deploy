@@ -6,8 +6,21 @@
   become: true
   pre_tasks:
 
+  - name: Create ansible user
+    user:
+      name: "{{ ansible_user }}"
+      groups: wheel
+
   - name: Grant ansible access to server
     authorized_key:
       user: "{{ ansible_user }}"
       state: present
-      key: "{{ lookup('file', 'templates/ansible_user.pub') }}"
+      key: "{{ lookup('file', 'files/ansible_user.pub') }}"
+
+  - name: add sudoers file for ansible user
+    template:
+      src: sudoer_ansible.j2
+      dest: "/etc/sudoers.d/{{ ansible_user }}"
+      owner: root
+      group: root
+      mode: 0440
