@@ -1,7 +1,6 @@
 ---
 
 - hosts: tor
-  become: true
   roles:
     - base
     - motd
