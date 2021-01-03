@@ -2,7 +2,7 @@
 
 - name: Configure all servers.
   hosts: all
-  become: yes
+  become: true
   roles:
     - security
 

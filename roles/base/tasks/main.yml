@@ -5,16 +5,18 @@
   dnf:
     update_only: yes
     update_cache: yes
-  when: ansible_distribution == "CentOS"
   become: true
+  when: ansible_distribution == "CentOS"
+
 
 - name: install updates (Ubuntu)
   tags: always
   apt:
     upgrade: dist
     update_cache: yes
-  when: ansible_distribution == "Ubuntu"
   become: true
+  when: ansible_distribution == "Ubuntu"
+
 
 - name: generate sshd_config file from template
   tags: ssh
