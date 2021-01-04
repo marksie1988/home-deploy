@@ -1,8 +1,0 @@
----
-prefix_dir: ""
-ansible_unit_test: False
-githubhooks: []
-httphooks: []
-user: "webhook"
-webhook_groups: ''
-optional_args: ""
