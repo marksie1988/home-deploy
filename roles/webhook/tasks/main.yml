@@ -1,0 +1,57 @@
+---
+- name: Add group "webhook"
+  become: yes
+  group: name=webhook
+
+- name: Add user "webhook"
+  become: yes
+  user: 
+    name: webhook 
+    group: webhook
+    groups: "{{ webhook_groups }}"
+    home: /var/webhook
+    shell: /bin/false
+
+- name: check if webhook file already exists (to allow download bypass - necessary if behind firewall)
+  stat: 
+    path: /tmp/webhook.tar.gz
+  register: tarball
+
+- name: Download file with check (md5)
+  tags: download
+  get_url:
+    url: "https://github.com/adnanh/webhook/releases/download/2.7.0/webhook-linux-amd64.tar.gz" 
+    dest: "/tmp/webhook.tar.gz"
+    checksum: md5:8bb63914f4ead672ff43191e91b0249f
+  when: not ansible_unit_test or not tarball.stat.exists
+
+- name: Unarchive a file with extra options
+  tags: download
+  become: yes
+  shell: tar -xvf /tmp/webhook.tar.gz --strip-components=1 -C /usr/local/bin/
+  when: not ansible_unit_test
+
+- name: Create test directory
+  become: yes
+  file:
+    path: "{{ prefix_dir}}/var/webhook"
+    state: directory
+    owner: webhook
+    group: webhook
+
+- name: Copy webhook hooks.json file
+  become: yes
+  template:
+    src: templates/hooks.json.j2
+    dest: "{{ prefix_dir }}/var/webhook/hooks.json"
+    owner: webhook
+    group: webhook
+    mode: u=rw,g=r,o=r
+
+- name: Install systemd file for webhook
+  template: src=templates/webhook.service.j2 dest={{ prefix_dir }}/etc/systemd/system/webhook.service owner=root group=root mode="u=rw,g=r,o=r"
+  when: not ansible_unit_test
+
+- name: Enable and start webhook service
+  service: name=webhook enabled=true state=restarted
+  when: not ansible_unit_test

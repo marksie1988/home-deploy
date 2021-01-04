@@ -1,0 +1,14 @@
+[Unit]
+Description=Adnan Webhooks
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=webhook
+Restart=on-failure
+RestartSec=5
+ExecStart=/usr/local/bin/webhook -verbose -hotreload -hooks /var/webhook/hooks.json {{ optional_args }}
+
+[Install]
+WantedBy=multi-user.target

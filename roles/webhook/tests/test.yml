@@ -1,0 +1,36 @@
+- hosts: 127.0.0.1
+  connection: local
+  tags:
+    - case-1
+  vars:
+    ansible_unit_test: True
+    optional_args: "-secure -cert /path/to/cert"
+    webhook_groups: 
+      - ssl-certs
+    githubhooks:
+      - id: "redeploy-webhook-github"
+        cmd: "./reload.sh"
+        cwd: "/var/"
+        branch: master
+        token: supersecretpassword
+        args:
+          - source: "url"
+            name: "name"
+    gitlabhooks:
+      - id: "redeploy-webhook-gitlab"
+        cmd: "./reload.sh"
+        cwd: "/var/"
+        branch: ''
+        token: supersecretpassword
+        args:
+          - source: "url"
+            name: "name"
+    httphooks:
+      - id: "test id"
+        cmd: "./reload.sh"
+        cwd: "/var/"
+        responseMsg: "hello, world"
+        branch: master
+        token: secretsuper
+  roles:
+    - role: ../..
