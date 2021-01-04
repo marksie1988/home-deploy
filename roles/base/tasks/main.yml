@@ -1,0 +1,17 @@
+---
+
+- name: install updates (CentOS)
+  tags: always
+  dnf:
+    update_only: yes
+    update_cache: yes
+  become: true
+  when: ansible_distribution == "CentOS"
+
+- name: install updates (Ubuntu)
+  tags: always
+  apt:
+    upgrade: dist
+    update_cache: yes
+  become: true
+  when: ansible_distribution == "Ubuntu"
