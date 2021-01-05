@@ -8,7 +8,6 @@
   become: true
   when: ansible_distribution == "CentOS"
 
-
 - name: install updates (Ubuntu)
   tags: always
   apt:
@@ -16,28 +15,3 @@
     update_cache: yes
   become: true
   when: ansible_distribution == "Ubuntu"
-
-
-- name: generate sshd_config file from template
-  tags: ssh
-  template:
-    src: sshd_config_ubuntu.j2
-    dest: /etc/ssh/sshd_config
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart_sshd
-  become: true
-  when: ansible_distribution == "Ubuntu"
-
-- name: generate sshd_config file from template
-  tags: ssh
-  template:
-    src: sshd_config_centos.j2
-    dest: /etc/ssh/sshd_config
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart_sshd
-  become: true
-  when: ansible_distribution == "CentOS"
