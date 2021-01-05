@@ -39,6 +39,12 @@ ssh-keygen -t ed25519 -C "Ansible User"
 
 copy the `id_ed25519.pub` file to the templates folder and rename it `ansible_user.pub`
 
+If updates have been added to submodules run:
+
+```shell
+git submodule foreach git pull origin master
+```
+
 ### Install WebHook
 
 ```shell
