@@ -33,7 +33,7 @@ ssh-keygen -t ed25519 -C "Ansible User"
 
 ```shell
  sudo apt install -y git
- git clone git@github.com:totaldebug/home-deploy.git
+ git clone https://github.com/marksie1988/home-deploy.git --recursive
  cd ~/home-deploy
 ```
 
