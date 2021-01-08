@@ -4,6 +4,7 @@
   hosts: all
   become: true
   roles:
+    - base
     - security
 
 - import_playbook: hassio.yml
