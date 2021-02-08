@@ -3,6 +3,7 @@
 - hosts: hassio
   roles:
     - motd
-    - docker
+    - role: docker
+      become: true
     - hassio
     - webhook
