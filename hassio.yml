@@ -10,14 +10,15 @@
     # - webhook
 
   tasks:
-    - name: Pause until Hassio Online
+    - name: Pause until a Hassio is reachable from this host
       uri:
-        url: "http://127.0.0.1:8123/"
-        status_code: 200
-        register: result
-        until: result.status == 200
-        retries: 60
-        delay: 1
+        url: "http://192.0.2.1:8123"
+        follow_redirects: none
+        method: GET
+      register: _result
+      until: _result.status == 200
+      retries: 180 # 180 * 5 seconds = 15mins (60*60/5)
+      delay: 5 # Every 5 seconds
     - name: Install Addons
       hassio_addons:
         state: present
