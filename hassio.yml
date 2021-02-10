@@ -17,3 +17,4 @@
         - grafana
         - core_mosquitto
         - core_deconz
+      become: true
