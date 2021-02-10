@@ -12,6 +12,8 @@
   tasks:
     - hassio_addon:
         state: present
-        name:
-          - core_deconz
-          - core_mosquitto
+        name: "{{ item }}"
+      with_items:
+        - grafana
+        - core_mosquitto
+        - core_deconz
