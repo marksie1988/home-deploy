@@ -10,7 +10,16 @@
     # - webhook
 
   tasks:
-    - hassio_addons:
+    - name: Pause until Hassio Online
+      uri:
+        url: "http://127.0.0.1:8123/"
+        status_code: 200
+        register: result
+        until: result.status == 200
+        retries: 60
+        delay: 1
+    - name: Install Addons
+      hassio_addons:
         state: present
         name: "{{ item }}"
       with_items:
