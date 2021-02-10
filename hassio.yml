@@ -9,8 +9,9 @@
       become: true
     # - webhook
 
-- hassio_addon:
-    state: present
-    name:
-      - core_deconz
-      - core_mosquitto
+  tasks:
+    - hassio_addon:
+        state: present
+        name:
+          - core_deconz
+          - core_mosquitto
