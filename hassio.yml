@@ -27,7 +27,7 @@
 
     - name: do this thing if it is NOT up
       shell: echo "OMG it's not working!"
-      when: _result.stdout.find('Preparing') == -1
+      when: _result.content.find('Preparing') == -1
 
     - name: Install Addons
       hassio_addons:
