@@ -17,7 +17,7 @@
         follow_redirects: all
         return_content: true
       register: _result
-      until: _result.content.find('Preparing') != -1
+      until: _result.content.find('Preparing') == -1
       retries: 180 # 180 * 5 seconds = 15mins (60*60/5)
       delay: 5 # Every 5 seconds
       become: true
