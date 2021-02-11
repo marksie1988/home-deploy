@@ -17,17 +17,10 @@
         follow_redirects: all
         return_content: true
       register: _result
-      until: _result.status == 200
+      until: _result.content.find('Preparing') != -1
       retries: 180 # 180 * 5 seconds = 15mins (60*60/5)
       delay: 5 # Every 5 seconds
       become: true
-    - name: Print returned json dictionary
-      debug:
-        var: _result
-
-    - name: do this thing if it is NOT up
-      shell: echo "OMG it's not working!"
-      when: _result.content.find('Preparing') == -1
 
     - name: Install Addons
       hassio_addons:
