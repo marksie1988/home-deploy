@@ -31,3 +31,8 @@
         - core_mosquitto
         - core_deconz
       become: true
+      register: _result
+
+    - name: Show Addons
+      debug:
+        var: _result
