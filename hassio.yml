@@ -20,6 +20,9 @@
       retries: 180 # 180 * 5 seconds = 15mins (60*60/5)
       delay: 5 # Every 5 seconds
       become: true
+    - name: Print returned json dictionary
+      debug:
+        var: _result
     - name: Install Addons
       hassio_addons:
         state: present
