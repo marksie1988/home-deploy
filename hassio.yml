@@ -12,8 +12,9 @@
   tasks:
     - name: Pause until a Hassio is reachable from this host
       uri:
-        url: "127.0.0.1:8123"
+        url: "http://127.0.0.1:8123/"
         method: GET
+        follow_redirects: all
       register: _result
       until: _result.status == 200
       retries: 180 # 180 * 5 seconds = 15mins (60*60/5)
