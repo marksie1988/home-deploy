@@ -35,6 +35,8 @@ ssh-keygen -t ed25519 -C "Ansible User"
  sudo apt install -y git
  git clone https://github.com/marksie1988/home-deploy.git --recursive
  cd ~/home-deploy
+ git submodule init
+ git submodule update
 ```
 
 copy the `id_ed25519.pub` file to the templates folder and rename it `ansible_user.pub`
