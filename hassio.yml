@@ -29,7 +29,7 @@
         state: present
         name: "{{ item }}"
       with_items:
-        - grafana
+        - a0d7b954_grafana
         - core_mosquitto
         - core_deconz
       become: true
