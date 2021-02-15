@@ -1,0 +1,14 @@
+---
+roles:
+  - name: totaldebug.deluge
+    version: v1.0.0
+  - name: totaldebug.hassio
+    version: v1.0.0
+  - name: totaldebug.motd
+    version: v1.0.3
+  - name: totaldebug.webhook
+    version: 1.0.0
+  - name: geerlingguy.security
+    version: 2.0.1
+  - name: geerlingguy.docker
+    version: 3.0.0
