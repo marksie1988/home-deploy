@@ -31,7 +31,7 @@
 
     # Installs HASSIO Addons using https://github.com/totaldebug/ansible-module-hassio
     - name: Install Addons
-      totaldebug.hassio_cli.hassio_addon:
+      totaldebug.hassio_cli.hassio_addons:
         state: present
         name: "{{ item }}"
       with_items:
