@@ -16,6 +16,3 @@
 [submodule "roles/deluge"]
 	path = roles/deluge
 	url = https://github.com/totaldebug/ansible-role-deluge.git
-[submodule "library"]
-	path = library
-	url = https://github.com/totaldebug/ansible-module-hassio.git
