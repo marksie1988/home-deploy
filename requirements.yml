@@ -12,3 +12,7 @@ roles:
     version: 2.0.1
   - name: geerlingguy.docker
     version: 3.0.0
+
+collections:
+  - name: totaldebug.hassio_cli
+    version: 2.1.0

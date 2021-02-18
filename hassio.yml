@@ -24,9 +24,14 @@
       delay: 5 # Every 5 seconds
       become: true
 
+    - name: Add custom Addon repos
+      totaldebug.hassio_cli.hassio_addon_repos:
+        state: present
+        repo: "https://github.com/helto4real/hassio-add-ons"
+
     # Installs HASSIO Addons using https://github.com/totaldebug/ansible-module-hassio
     - name: Install Addons
-      hassio_addons:
+      totaldebug.hassio_cli.hassio_addon:
         state: present
         name: "{{ item }}"
       with_items:
