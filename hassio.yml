@@ -28,6 +28,7 @@
       totaldebug.hassio_cli.hassio_addon_repos:
         state: present
         repo: "https://github.com/helto4real/hassio-add-ons"
+      become: true
 
     # Installs HASSIO Addons using https://github.com/totaldebug/ansible-module-hassio
     - name: Install Addons
