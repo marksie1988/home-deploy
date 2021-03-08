@@ -3,4 +3,5 @@
 - hosts: minecraft
   roles:
     - totaldebug.motd
-    - totaldebug.minecraft
+    - role: totaldebug.minecraft
+      become: true
