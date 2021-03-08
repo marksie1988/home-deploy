@@ -10,3 +10,5 @@
 - import_playbook: hassio.yml
 
 - import_playbook: tor.yml
+
+- import_playbook: minecraft.yml
