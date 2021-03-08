@@ -2,5 +2,5 @@
 
 - hosts: minecraft
   roles:
-    - motd
-    - minecraft
+    - totaldebug.motd
+    - totaldebug.minecraft
