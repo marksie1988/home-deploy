@@ -4,6 +4,13 @@
 motd_modification: true
 motd_server_purpose: TOR
 
+# Users
+users:
+  - username: deluge
+    uid: 666
+    system: true
 
-# docker
+# deluge
+enable_logging: true
+log_rotation: true
 

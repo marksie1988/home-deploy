@@ -3,3 +3,12 @@
 ansible_user: simone
 
 motd_ascii_art: "                       _        _     __  ___   ___   ___/n                      | |      (_)   /_ |/ _ \ / _ \ / _ \/n  _ __ ___   __ _ _ __| | _____ _  ___| | (_) | (_) | (_) |/n | '_ ` _ \ / _` | '__| |/ / __| |/ _ \ |\__, |> _ < > _ </n | | | | | | (_| | |  |   <\__ \ |  __/ |  / /| (_) | (_) |/n |_| |_| |_|\__,_|_|  |_|\_\___/_|\___|_| /_/  \___/ \___/"
+
+
+# Users
+users:
+  - username: marksie1988
+    uid: 2000
+    groups: ['sudo']
+    ssh-key:
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIPHr5rza46s+3LMROvxb9CRj/Bh5I7qHKXgOz4FqwVv Main Account"

@@ -1,5 +1,7 @@
 ---
 roles:
+  - name: totaldebug.users
+    version: 1.0.1
   - name: totaldebug.deluge
     version: v1.0.0
   - name: totaldebug.hassio
