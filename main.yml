@@ -6,6 +6,7 @@
   roles:
     - base
     - security
+    - totaldebug.users
 
 - import_playbook: hassio.yml
 
