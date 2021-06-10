@@ -6,9 +6,11 @@ motd_ascii_art: "                       _        _     __  ___   ___   ___/n    
 
 
 # Users
-users:
+_default_users:
   - username: marksie1988
     uid: 2000
     groups: ['sudo']
     ssh-key:
       - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIPHr5rza46s+3LMROvxb9CRj/Bh5I7qHKXgOz4FqwVv Main Account"
+
+users: "{{ _default_users + (_specific_users | default([])) }}"

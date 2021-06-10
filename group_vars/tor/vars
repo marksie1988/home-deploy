@@ -5,7 +5,7 @@ motd_modification: true
 motd_server_purpose: TOR
 
 # Users
-users:
+_specific_users:
   - username: deluge
     uid: 666
     system: true
