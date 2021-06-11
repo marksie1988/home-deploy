@@ -3,7 +3,7 @@ roles:
   - name: totaldebug.users
     version: 1.0.9
   - name: totaldebug.deluge
-    version: v1.0.0
+    version: 1.0.5
   - name: totaldebug.hassio
     version: v1.0.0
   - name: totaldebug.motd
