@@ -91,3 +91,10 @@ To limit to a specific group of hosts:
 ```shell
 ansible-playbook authorized_keys.yml --ask-pass --ask-become-pass --limit <host-group>
 ```
+
+### Deploy playbooks
+
+```shell
+ansible-playbook main.yml --ask-become-pass --limit <host-group> -i <inventory-file> --ask-vault-pass
+```
+Vault should be used for any files with sensitive data
