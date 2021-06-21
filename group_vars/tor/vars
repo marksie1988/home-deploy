@@ -14,3 +14,26 @@ _specific_users:
 enable_logging: true
 log_rotation: true
 
+# NFS 
+nfs_exports: [
+  "/home/media_svc/Downloads/      172.16.20.4(rw,sync,no_root_squash,no_subtree_check)"
+]
+
+# Wireguard
+wg-home:
+  method: "wg-quick"
+  enable: True
+  listen_port: 51820
+  private_key: "{{ lookup('community.general.onepassword', 'tor_wireguard_priv_key') }}"
+  addresses:
+    - 192.168.10.2/24
+  dns:
+    - 1.1.1.1
+  peers:
+    - comment: "Home VPN"
+      public_key: "{{ lookup('community.general.onepassword', 'home_wireguard_pub_key') }}"
+      allowed_ips:
+        - 172.16.20.0/24
+        - 172.16.1.0/24
+      endpoint: "{{ lookup('community.general.onepassword', 'home_address') }}"
+      persistent_keepalive: 25

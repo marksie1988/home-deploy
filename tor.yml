@@ -4,3 +4,5 @@
   roles:
     - totaldebug.motd
     - totaldebug.deluge
+    - geerlingguy.nfs
+    - Anthony25.wireguard
