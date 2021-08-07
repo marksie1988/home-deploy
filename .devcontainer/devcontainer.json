@@ -1,0 +1,26 @@
+{
+    "name": "home-deploy",
+    "dockerFile": "Dockerfile",
+    "context": "..",
+    "postCreateCommand": "npm install",
+    "workspaceFolder": "/home-deploy",
+    "workspaceMount": "type=bind,source=/home/marksie1988/repos/home-deploy,target=/home-deploy",
+    "extensions": [
+        "github.vscode-pull-request-github",
+        "yzhang.markdown-all-in-one",
+        "bierner.lit-html",
+        "runem.lit-plugin",
+        "davidanson.vscode-markdownlint",
+        "redhat.vscode-yaml",
+        "eamodio.gitlens"
+    ],
+    "settings": {
+        "files.eol": "\n",
+        "editor.tabSize": 4,
+        "terminal.integrated.shell.linux": "/bin/zsh",
+        "editor.formatOnPaste": false,
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "files.trimTrailingWhitespace": true
+    }
+}
