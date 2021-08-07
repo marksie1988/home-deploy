@@ -4,5 +4,6 @@
   roles:
     - totaldebug.motd
     - totaldebug.deluge
-    - geerlingguy.nfs
+    - role: geerlingguy.nfs
+      become: true
     - totaldebug.wireguard
