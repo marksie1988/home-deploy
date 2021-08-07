@@ -6,7 +6,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 93C4A3FD7B
 RUN apt update
 RUN apt upgrade  -y
 
-RUN apt install zsh ansible -y
+RUN apt install zsh git wget ansible -y
 
 RUN wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O - | zsh || true
 
