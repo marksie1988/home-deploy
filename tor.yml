@@ -5,4 +5,5 @@
     - totaldebug.deluge
     - role: geerlingguy.nfs
       become: true
-    - githubixx.ansible_role_wireguard
+    - role: githubixx.ansible_role_wireguard
+      become: true
