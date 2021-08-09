@@ -1,9 +1,5 @@
 ---
 - hosts: tor
-  tasks:
-    - name: sho priv key
-      debug:
-        var: "{{ wireguard_private_key }}"
   roles:
     - totaldebug.motd
     - totaldebug.deluge
