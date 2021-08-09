@@ -1,9 +1,8 @@
 ---
-
 - hosts: tor
   roles:
     - totaldebug.motd
     - totaldebug.deluge
     - role: geerlingguy.nfs
       become: true
-    - totaldebug.wireguard
+    - githubixx.ansible_role_wireguard
