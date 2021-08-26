@@ -7,3 +7,17 @@
       become: true
     - role: githubixx.ansible_role_wireguard
       become: true
+  tasks:
+    - name: copy firewall update script
+      ansible.builtin.template:
+        src: firewall_update.py.j2
+        dest: /usr/local/bin/firewall_update.py
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+    - name: create cron to update firewall
+      ansible.builtin.cron:
+        name: "check firewall"
+        minute: "*/5"
+        job: "/bin/python3 /usr/local/bin/firewall_update.py"
+        user: root
