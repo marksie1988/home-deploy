@@ -23,19 +23,25 @@
       ansible.posix.firewalld:
         zone: public
         port: "{{ item }}"
-        permanent: yes
+        permanent: true
         state: enabled
       loop:
         - 62952/tcp
         - 62952/udp
       become: true
+    - name: Add zone remote_access and source
+      ansible.posix.firewalld:
+        zone: remote_access
+        source: 1.1.1.1
+        permanent: true
+        state: enabled
     - name: Update remote access firewall rule
       ansible.posix.firewalld:
         zone: remote_access
         source: 1.1.1.1
         port: "{{ item }}"
         service: ssh
-        permanent: yes
+        permanent: true
         state: enabled
       loop:
         - 8112/tcp
