@@ -8,6 +8,35 @@
     - role: githubixx.ansible_role_wireguard
       become: true
   tasks:
+    - name: Install Firewalld 
+      ansible.builtin.package:
+        name: firewalld
+        state: present
+    - name: Enable Firewalld
+      ansible.builtin.service:
+        name: firewalld
+        enabled: true
+        state: started
+    - name: Update public firewall rule
+      ansible.posix.firewalld:
+        zone: public
+        port: 
+          - 62952/tcp
+          - 62952/udp
+        permanent: yes
+        state: enabled
+    - name: Update remote access firewall rule
+      ansible.posix.firewalld:
+        zone: remote_access
+        source: 1.1.1.1
+        port: 
+          - 8112/tcp
+          - 2812/tcp
+          - 10050/tcp
+          - 9117/tcp
+        service: ssh
+        permanent: yes
+        state: enabled
     - name: copy firewall update script
       ansible.builtin.template:
         src: firewall_update.py.j2
