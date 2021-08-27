@@ -25,7 +25,7 @@
         port: "{{ item }}"
         permanent: yes
         state: enabled
-      with_items:
+      loop:
         - 62952/tcp
         - 62952/udp
       become: true
@@ -37,7 +37,7 @@
         service: ssh
         permanent: yes
         state: enabled
-      with_items:
+      loop:
         - 8112/tcp
         - 2812/tcp
         - 10050/tcp
