@@ -22,7 +22,8 @@
     - name: Update public firewall rule
       ansible.posix.firewalld:
         zone: public
-        port: 
+        port: "{{ item }}"
+        with_items:
           - 62952/tcp
           - 62952/udp
         permanent: yes
@@ -32,7 +33,8 @@
       ansible.posix.firewalld:
         zone: remote_access
         source: 1.1.1.1
-        port: 
+        port: "{{ item }}"
+        with_items:
           - 8112/tcp
           - 2812/tcp
           - 10050/tcp
