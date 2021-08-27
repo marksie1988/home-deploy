@@ -12,11 +12,13 @@
       ansible.builtin.package:
         name: firewalld
         state: present
+      become: true
     - name: Enable Firewalld
       ansible.builtin.service:
         name: firewalld
         enabled: true
         state: started
+      become: true
     - name: Update public firewall rule
       ansible.posix.firewalld:
         zone: public
@@ -25,6 +27,7 @@
           - 62952/udp
         permanent: yes
         state: enabled
+      become: true
     - name: Update remote access firewall rule
       ansible.posix.firewalld:
         zone: remote_access
@@ -37,6 +40,7 @@
         service: ssh
         permanent: yes
         state: enabled
+      become: true
     - name: copy firewall update script
       ansible.builtin.template:
         src: firewall_update.py.j2
@@ -44,9 +48,11 @@
         owner: root
         group: root
         mode: u=rwx,g=rx,o=rx
+      become: true
     - name: create cron to update firewall
       ansible.builtin.cron:
         name: "check firewall"
         minute: "*/5"
         job: "/bin/python3 /usr/local/bin/firewall_update.py"
         user: root
+      become: true
