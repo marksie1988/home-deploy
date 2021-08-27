@@ -35,6 +35,7 @@
         source: 1.1.1.1
         permanent: true
         state: enabled
+      become: true
     - name: Update remote access firewall rule
       ansible.posix.firewalld:
         zone: remote_access
