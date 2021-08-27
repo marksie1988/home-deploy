@@ -23,25 +23,25 @@
       ansible.posix.firewalld:
         zone: public
         port: "{{ item }}"
-        with_items:
-          - 62952/tcp
-          - 62952/udp
         permanent: yes
         state: enabled
+      with_items:
+        - 62952/tcp
+        - 62952/udp
       become: true
     - name: Update remote access firewall rule
       ansible.posix.firewalld:
         zone: remote_access
         source: 1.1.1.1
         port: "{{ item }}"
-        with_items:
-          - 8112/tcp
-          - 2812/tcp
-          - 10050/tcp
-          - 9117/tcp
         service: ssh
         permanent: yes
         state: enabled
+      with_items:
+        - 8112/tcp
+        - 2812/tcp
+        - 10050/tcp
+        - 9117/tcp
       become: true
     - name: copy firewall update script
       ansible.builtin.template:
