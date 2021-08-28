@@ -25,6 +25,7 @@
         interface: eth0
         permanent: true
         state: enabled
+      become: true
     - name: Update public firewall rule
       ansible.posix.firewalld:
         zone: public
