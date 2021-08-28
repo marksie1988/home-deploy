@@ -55,6 +55,13 @@
         permanent: true
         state: enabled
       become: true
+    - name: temp ssh public
+      ansible.posix.firewalld:
+        zone: public
+        service: ssh
+        permanent: true
+        state: enabled
+      become: true
     - name: copy firewall update script
       ansible.builtin.template:
         src: firewall_update.py.j2
