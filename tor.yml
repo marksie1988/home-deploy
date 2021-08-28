@@ -29,16 +29,16 @@
         - 62952/tcp
         - 62952/udp
       become: true
-    - name: Add zone remote_access and source
+    - name: Add zone work and source
       ansible.posix.firewalld:
-        zone: remote_access
+        zone: work
         source: 1.1.1.1
         permanent: true
         state: enabled
       become: true
-    - name: Update remote access firewall rule
+    - name: Update work firewall rule
       ansible.posix.firewalld:
-        zone: remote_access
+        zone: work
         source: 1.1.1.1
         port: "{{ item }}"
         service: ssh
