@@ -8,7 +8,7 @@
     - role: githubixx.ansible_role_wireguard
       become: true
   tasks:
-    - name: Install Firewalld 
+    - name: Install Firewalld
       ansible.builtin.package:
         name: firewalld
         state: present
@@ -39,9 +39,7 @@
     - name: Update work firewall rule
       ansible.posix.firewalld:
         zone: work
-        source: 1.1.1.1
         port: "{{ item }}"
-        service: ssh
         permanent: true
         state: enabled
       loop:
@@ -49,6 +47,13 @@
         - 2812/tcp
         - 10050/tcp
         - 9117/tcp
+      become: true
+    - name: Add SSH to work
+      ansible.posix.firewalld:
+        zone: work
+        service: ssh
+        permanent: true
+        state: enabled
       become: true
     - name: copy firewall update script
       ansible.builtin.template:
