@@ -19,6 +19,12 @@
         enabled: true
         state: started
       become: true
+    - name: Set public zone interface
+      ansible.posix.firewalld:
+        zone: public
+        interface: eth0
+        permanent: true
+        state: enabled
     - name: Update public firewall rule
       ansible.posix.firewalld:
         zone: public
@@ -28,6 +34,13 @@
       loop:
         - 62952/tcp
         - 62952/udp
+      become: true
+    - name: temp ssh public
+      ansible.posix.firewalld:
+        zone: public
+        service: ssh
+        permanent: true
+        state: enabled
       become: true
     - name: Add zone work and source
       ansible.posix.firewalld:
@@ -51,13 +64,6 @@
     - name: Add SSH to work
       ansible.posix.firewalld:
         zone: work
-        service: ssh
-        permanent: true
-        state: enabled
-      become: true
-    - name: temp ssh public
-      ansible.posix.firewalld:
-        zone: public
         service: ssh
         permanent: true
         state: enabled
