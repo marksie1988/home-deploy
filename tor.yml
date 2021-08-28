@@ -8,6 +8,13 @@
     - role: githubixx.ansible_role_wireguard
       become: true
   tasks:
+    - name: add backports repository
+      apt_repository:
+        repo: deb http://deb.debian.org/debian buster-backports main
+        state: present
+        update_cache: true
+      become: true
+
     - name: Install Firewalld
       ansible.builtin.package:
         name: firewalld
