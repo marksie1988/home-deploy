@@ -105,3 +105,4 @@
       become: true
     - name: Reboot server
       ansible.builtin.reboot:
+      become: true
