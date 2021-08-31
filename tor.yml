@@ -14,11 +14,22 @@
         state: present
         update_cache: true
       become: true
-
-    - name: Install Firewalld
+    - name: Install backports IPTables
       ansible.builtin.package:
-        name: firewalld
+        name: iptables/buster-backports
         state: present
+      become: true
+    - name: Install Firewalld & Python3-pip
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - firewalld
+        - python3-pip
+      become: true
+    - name: Install dns python package
+      pip:
+        name: dnspython
       become: true
     - name: Enable Firewalld
       ansible.builtin.service:
@@ -91,3 +102,5 @@
         job: "/bin/python3 /usr/local/bin/firewall_update.py"
         user: root
       become: true
+    - name: Reboot server
+      ansible.builtin.reboot:

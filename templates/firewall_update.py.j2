@@ -7,7 +7,7 @@ DNSAddress = "{{ lookup('community.general.onepassword', 'home_address') }}"
 FirewallZoneFile = "{{ remote_access_rule_file }}"
 
 regex = re.compile(r"(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)")
-result = dns.resolver.query(DNSAddress, 'A')
+result = dns.resolver.resolve(DNSAddress, 'A')
 
 for ipval in result:
     newip = str(ipval)
