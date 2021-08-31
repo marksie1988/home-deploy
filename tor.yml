@@ -16,7 +16,8 @@
       become: true
     - name: Install backports IPTables
       ansible.builtin.apt:
-        name: iptables/buster-backports
+        name: iptables
+        default_release: buster-backports
         state: present
       become: true
     - name: Install Firewalld & Python3-pip
