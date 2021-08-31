@@ -8,6 +8,12 @@
     - role: githubixx.ansible_role_wireguard
       become: true
   tasks:
+    - name: Enable Wireguard
+      ansible.builtin.service:
+        name: wg-quick@wg0
+        enabled: true
+        state: started
+      become: true
     - name: add backports repository
       apt_repository:
         repo: deb http://deb.debian.org/debian buster-backports main
@@ -54,13 +60,6 @@
       loop:
         - 62952/tcp
         - 62952/udp
-      become: true
-    - name: temp ssh public
-      ansible.posix.firewalld:
-        zone: public
-        service: ssh
-        permanent: true
-        state: enabled
       become: true
     - name: Add zone work and source
       ansible.posix.firewalld:
