@@ -1,5 +1,4 @@
 ---
-
 - name: Configure all servers.
   hosts: all
   become: true
@@ -15,3 +14,5 @@
 - import_playbook: minecraft.yml
 
 - import_playbook: proxy.yml
+
+- import_playbook: plex.yml
