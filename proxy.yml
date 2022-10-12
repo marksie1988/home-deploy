@@ -1,3 +1,1 @@
 - hosts: proxy
-  roles:
-    - totaldebug.motd

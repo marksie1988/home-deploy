@@ -1,7 +1,7 @@
 ---
 - hosts: tor
   roles:
-    - totaldebug.motd
+    
     - totaldebug.deluge
     - role: geerlingguy.nfs
       become: true

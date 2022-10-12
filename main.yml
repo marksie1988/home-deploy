@@ -5,7 +5,11 @@
   roles:
     - base
     - security
+    - totaldebug.motd
     - totaldebug.users
+    - totaldebug.dotfiles
+
+- import_playbook: backups.yml
 
 - import_playbook: hassio.yml
 

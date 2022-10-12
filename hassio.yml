@@ -2,7 +2,6 @@
 
 - hosts: hassio
   roles:
-    - motd
     - role: docker
       become: true
     - role: hassio
