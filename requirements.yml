@@ -20,6 +20,8 @@ roles:
     version: 2.0.0
   - name: githubixx.ansible_role_wireguard
     version: 7.12.0
+  - name: totaldebug.certbot
+    version: 5.1.0
 
 collections:
   - name: community.general

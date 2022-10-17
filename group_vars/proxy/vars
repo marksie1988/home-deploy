@@ -1,3 +1,23 @@
 # motd
 motd_modification: true
 motd_server_purpose: Proxy
+
+githubhooks:
+  - id: "proxy-deploy"
+    cmd: "/etc/nginx/conf.d/deploy-hook.sh"
+    cwd: "/etc/nginx/conf.d/"
+    branch: master
+    token: "{{ lookup('community.general.onepassword', 'proxy_hook_secret') }}"
+
+# SSL Cert Creation
+certbot_create_method: dns
+
+certbot_dns_plugin: cloudflare
+
+certbot_dns_key_secret: "{{ lookup('community.general.onepassword', 'cloudflare_api_token') }}"
+
+certbot_certs:
+  - domains:
+      - "*.marksiesplace.co.uk"
+  - domains:
+      - "*.totaldebug.uk"
