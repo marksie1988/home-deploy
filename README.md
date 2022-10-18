@@ -95,6 +95,10 @@ ansible-playbook authorized_keys.yml --ask-pass --ask-become-pass --limit <host-
 ### Deploy playbooks
 
 ```shell
+eval $(op signin my)
+```
+
+```shell
 ansible-playbook main.yml --ask-become-pass --limit <host-group> -i <inventory-file> --ask-vault-pass
 ```
 

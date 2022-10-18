@@ -9,7 +9,7 @@ roles:
   - name: totaldebug.motd
     version: v1.0.3
   - name: totaldebug.webhook
-    version: 1.0.0
+    version: 1.0.1
   - name: geerlingguy.security
     version: 2.0.1
   - name: geerlingguy.docker
