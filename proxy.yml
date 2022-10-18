@@ -2,6 +2,7 @@
   roles:
     - role: totaldebug.webhook
     - role: totaldebug.certbot
+      become: true
   tasks:
     - name: Checkout nginx config
       ansible.builtin.git:
