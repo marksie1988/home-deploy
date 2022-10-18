@@ -14,7 +14,7 @@ _default_users:
   password: "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='password') }}"
   groups: ["sudo"]
   ssh_key:
-  - "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='publicKey') }}"
+  - "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='pub_key') }}"
 
 users: "{{ _default_users + (_specific_users | default([])) }}"
 security_ssh_allowed_users:
