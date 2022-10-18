@@ -1,27 +1,21 @@
 ---
 roles:
   - name: totaldebug.users
-    version: 1.1.0
   - name: totaldebug.deluge
-    version: 1.1.8
   - name: totaldebug.hassio
-    version: v1.0.0
   - name: totaldebug.motd
-    version: v1.0.3
   - name: totaldebug.webhook
-    version: 1.0.1
-  - name: geerlingguy.security
-    version: 2.0.1
-  - name: geerlingguy.docker
-    version: 3.0.0
+  - name: totaldebug.certbot
   - name: totaldebug.minecraft
-    version: 1.1.1
+  - name: geerlingguy.security
+    version: 2.2.0
+  - name: geerlingguy.docker
+    version: 6.0.1
+  - name: totaldebug.minecraft
   - name: geerlingguy.nfs
     version: 2.0.0
   - name: githubixx.ansible_role_wireguard
-    version: 7.12.0
-  - name: totaldebug.certbot
-    version: 5.1.0
+    version: 10.0.0
 
 collections:
   - name: community.general
