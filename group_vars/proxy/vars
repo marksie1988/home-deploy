@@ -13,7 +13,7 @@ githubhooks:
 certbot_install_method: package
 certbot_create_if_missing: true
 certbot_create_method: dns
-
+certbot_nginx: true
 certbot_dns_plugin: cloudflare
 
 certbot_dns_key_secret: "{{ lookup('community.general.onepassword', 'cloudflare_api_token') }}"
