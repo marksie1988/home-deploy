@@ -19,7 +19,9 @@ certbot_dns_plugin: cloudflare
 certbot_dns_key_secret: "{{ lookup('community.general.onepassword', 'cloudflare_api_token') }}"
 
 certbot_certs:
-  - domains:
+  - email: marksie1988@gmail.com
+    domains:
       - "*.marksiesplace.co.uk"
-  - domains:
+  - email: marksie1988@gmail.com
+    domains:
       - "*.totaldebug.uk"
