@@ -19,6 +19,7 @@
       file:
         path: "/etc/nginx/sites-enabled/default"
         state: absent
+      become: true
     - name: Checkout nginx config
       ansible.builtin.git:
         repo: git@github.com:marksie1988/reverse-proxy.git
