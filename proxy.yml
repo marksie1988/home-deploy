@@ -8,6 +8,7 @@
       ansible.builtin.package:
         name: nginx
         state: present
+      become: true
     - name: Add user to nginx group
       ansible.builtin.user:
         name: "{{ ansible_user }}"
