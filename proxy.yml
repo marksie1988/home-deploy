@@ -4,15 +4,26 @@
     - role: totaldebug.certbot
       become: true
   tasks:
+    - name: "(Hack: keep SSH forwarding socket)"
+      lineinfile:
+        dest: /etc/sudoers
+        insertafter: '^#?\s*Defaults\s+env_keep\b'
+        line: 'Defaults    env_keep += "SSH_AUTH_SOCK"'
+      become: true
     - name: Install nginx
       ansible.builtin.package:
         name: nginx
         state: present
       become: true
+    - name: Deleting default nginx config
+      file:
+        path: "/etc/nginx/sites-enabled/default.conf"
+        state: absent
     - name: Checkout nginx config
       ansible.builtin.git:
         repo: git@github.com:marksie1988/reverse-proxy.git
-        dest: /etc/nginx/sites-enabled/
+        dest: /etc/nginx/conf.d/
+        force: true
         accept_hostkey: true
       become: true
     - name: Change permission on deploy-hook.sh file
