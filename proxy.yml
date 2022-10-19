@@ -17,7 +17,7 @@
       become: true
     - name: Deleting default nginx config
       file:
-        path: "/etc/nginx/sites-enabled/default.conf"
+        path: "/etc/nginx/sites-enabled/default"
         state: absent
     - name: Checkout nginx config
       ansible.builtin.git:
@@ -35,5 +35,5 @@
     - name: Start Nginx
       ansible.builtin.service:
         name: nginx
-        state: started
+        state: restarted
         enabled: true
