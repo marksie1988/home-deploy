@@ -4,6 +4,10 @@
     - role: totaldebug.certbot
       become: true
   tasks:
+    - name: Install nginx
+      ansible.builtin.package:
+        name: nginx
+        state: present
     - name: Add user to nginx group
       ansible.builtin.user:
         name: "{{ ansible_user }}"
@@ -21,3 +25,8 @@
         state: file
         mode: 0755
       become: true
+    - name: Start Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
