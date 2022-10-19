@@ -4,12 +4,16 @@
     - role: totaldebug.certbot
       become: true
   tasks:
+    - name: Add user to nginx group
+      ansible.builtin.user:
+        name: "{{ ansible_user }}"
+        groups: www-data
+        append: true
     - name: Checkout nginx config
       ansible.builtin.git:
         repo: git@github.com:marksie1988/reverse-proxy.git
-        dest: /etc/nginx/conf.d/
+        dest: ~/reverse-proxy
         accept_hostkey: true
-      become: true
     - name: Change permission on deploy-hook.sh file
       file:
         path: /etc/nginx/conf.d/deploy-hook.sh
