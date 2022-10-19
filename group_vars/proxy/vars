@@ -11,6 +11,7 @@ githubhooks:
 
 # SSL Cert Creation
 certbot_install_method: package
+certbot_create_if_missing: true
 certbot_create_method: dns
 
 certbot_dns_plugin: cloudflare
