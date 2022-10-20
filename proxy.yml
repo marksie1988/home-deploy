@@ -4,11 +4,13 @@
     - role: totaldebug.certbot
       become: true
   tasks:
-    - name: "(Hack: keep SSH forwarding socket)"
-      lineinfile:
-        dest: /etc/sudoers
-        insertafter: '^#?\s*Defaults\s+env_keep\b'
-        line: 'Defaults    env_keep += "SSH_AUTH_SOCK"'
+    - name: Copy Git SSH Key
+      ansible.builtin.copy:
+        content: "{{ lookup('community.general.onepassword', 'proxy_git_key', fields=priv_key) }}"
+        dest: /root/.ssh/github
+        group: root
+        user: root
+        mode: 0600
       become: true
     - name: Install nginx
       ansible.builtin.package:
@@ -16,7 +18,7 @@
         state: present
       become: true
     - name: Deleting default nginx config
-      file:
+      ansible.builtin.file:
         path: "/etc/nginx/sites-enabled/default"
         state: absent
       become: true
@@ -26,9 +28,10 @@
         dest: /etc/nginx/conf.d/
         force: true
         accept_hostkey: true
+        key_file: /root/.ssh/github
       become: true
     - name: Change permission on deploy-hook.sh file
-      file:
+      ansible.builtin.file:
         path: /etc/nginx/conf.d/deploy-hook.sh
         state: file
         mode: 0755
