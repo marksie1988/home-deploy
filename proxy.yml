@@ -9,7 +9,7 @@
         content: "{{ lookup('community.general.onepassword', 'proxy_git_key', fields=priv_key) }}"
         dest: /root/.ssh/github
         group: root
-        user: root
+        owner: root
         mode: 0600
       become: true
     - name: Install nginx
