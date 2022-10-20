@@ -6,7 +6,7 @@
   tasks:
     - name: Copy Git SSH Key
       ansible.builtin.copy:
-        content: "{{ lookup('community.general.onepassword', 'proxy_git_key', fields=priv_key) }}"
+        content: "{{ lookup('community.general.onepassword', 'proxy_git_key', field='priv_key') }}"
         dest: /root/.ssh/github
         group: root
         owner: root
