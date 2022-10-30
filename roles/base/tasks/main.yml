@@ -1,6 +1,6 @@
 ---
 - name: Wait for cloud-init to complete
-  shell: journalctl --boot _COMM=cloud-init | grep 'Cloud-init.*finished at'
+  shell: /usr/bin/cloud-init status --wait
   register: cloud_init_install
   retries: 60
   delay: 5
