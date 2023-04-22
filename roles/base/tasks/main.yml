@@ -21,3 +21,11 @@
     update_cache: true
   become: true
   when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+
+- name: Install zsh, curl & unzip
+  ansible.builtin.package:
+    name:
+      - zsh
+      - curl
+      - unzip
+    state: present

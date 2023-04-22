@@ -9,6 +9,8 @@
     - totaldebug.users
     - totaldebug.dotfiles
 
+- import_playbook: bastion.yml
+
 - import_playbook: backups.yml
 
 - import_playbook: hassio.yml
