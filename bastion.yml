@@ -1,11 +1,12 @@
 ---
 - hosts: bastion
 
-- name: Copy marksie1988 SSH Key
-  ansible.builtin.copy:
-    content: "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='priv_key') }}"
-    dest: /marksie1988/.ssh/id_ed25519
-    group: marksie1988
-    owner: marksie1988
-    mode: 0600
-  become: true
+  tasks:
+    - name: Copy marksie1988 SSH Key
+      ansible.builtin.copy:
+        content: "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='priv_key') }}"
+        dest: /marksie1988/.ssh/id_ed25519
+        group: marksie1988
+        owner: marksie1988
+        mode: 0600
+      become: true
