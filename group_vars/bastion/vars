@@ -1,0 +1,5 @@
+---
+
+# motd
+motd_modification: true
+motd_server_purpose: Bastion
