@@ -1,4 +1,6 @@
+
 [bastion]
+td-bast1 ansible_host=172.16.20.43 ansible_user=ubuntu
 
 [ha]
 
@@ -15,5 +17,3 @@ BKP-1 ansible_host=172.16.20.11 ansible_user=ubuntu
 [proxy]
 td-prx1 ansible_host=172.16.50.10 ansible_user=ubuntu
 
-[bastion]
-td-bast1 ansible_host=172.16.20.43 ansible_user=ubuntu
