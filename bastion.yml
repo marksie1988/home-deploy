@@ -8,5 +8,6 @@
         dest: /marksie1988/.ssh/id_ed25519
         group: marksie1988
         owner: marksie1988
+        state: directory
         mode: 0600
       become: true
