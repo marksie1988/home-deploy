@@ -5,7 +5,7 @@
     - name: Copy marksie1988 SSH Key
       ansible.builtin.copy:
         content: "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='priv_key') }}"
-        dest: /marksie1988/.ssh/id_ed25519
+        dest: /home/marksie1988/.ssh/id_ed25519
         group: marksie1988
         owner: marksie1988
         state: directory
