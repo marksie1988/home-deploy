@@ -11,3 +11,8 @@
         directory_mode: 0644
         mode: 0600
       become: true
+    - name: Install tmux
+      ansible.builtin.package:
+        name: tmux
+        state: present
+      become: true
