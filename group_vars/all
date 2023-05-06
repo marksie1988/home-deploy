@@ -6,7 +6,6 @@ motd_ascii_art: "                       _        _     __  ___   ___   ___/n    
 _default_users:
   - username: simone
     uid: 2000
-    password: "{{ lookup('community.general.onepassword', 'simone_ssh', field='password') }}"
     groups: ["sudo"]
     ssh_key:
       - "{{ lookup('community.general.onepassword', 'simone_ssh', field='pub_key') }}"
