@@ -20,10 +20,16 @@ _default_users:
     users_default_shell: /usr/local/bin/zsh
 
 users: "{{ _default_users + (_specific_users | default([])) }}"
+
+
+# Geerlingguy.security
 security_ssh_allowed_users:
   - marksie1988
   - simone
 
 security_sudoers_passwordless:
   - simone
-  - marksie1988
+
+security_autoupdate_enabled: true
+security_autoupdate_reboot: true
+security_autoupdate_reboot_time: "03:00"

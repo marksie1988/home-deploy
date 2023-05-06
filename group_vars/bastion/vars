@@ -1,5 +1,8 @@
 ---
 
 # motd
+
+motd_ascii_art: "                       __     _____   ___   ___\n                      | |      (_)   /_|/_ \ / _\ /_ \\n  ______   ___ ___| | _____ ____| | (_) | (_) | (_) |\n | '_ `_ \ / _` | '__| |/ /__| |/ _\ |\__, |> _< >_ <\n | | | | | | (_| | |  |   <\__ \ |  __/ |  / /| (_) | (_) |\n |_| |_| |_|\__,_|_|  |_|\_\___/_|\___|_| /_/  \___/ \___/"
 motd_modification: true
 motd_server_purpose: Bastion
+security_ssh_password_authentication: "yes"
