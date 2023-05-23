@@ -17,3 +17,7 @@ BKP-1 ansible_host=172.16.20.11
 [proxy]
 td-prx1 ansible_host=172.16.50.10
 
+[swarm]
+td-swarm1 ansible_host=172.16.20.51
+td-swarm2 ansible_host=172.16.20.52
+td-swarm3 ansible_host=172.16.20.53

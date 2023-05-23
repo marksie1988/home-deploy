@@ -23,3 +23,5 @@
 - import_playbook: proxy.yml
 
 - import_playbook: plex.yml
+
+- import_playbook: swarm.yml

@@ -1,0 +1,22 @@
+---
+- name: Initialize Docker Swarm
+  command: docker swarm init
+  args:
+    creates: /var/run/docker/swarm/control_token
+  tags: init_swarm
+
+- name: Retrieve Swarm join token
+  command: docker swarm join-token -q worker
+  changed_when: false
+  register: join_token
+  tags: get_join_token
+
+- name: Add managers to Docker Swarm
+  command: docker swarm join --token {{ join_token.stdout }} {{ groups['swarm'][0] }}:2377
+  when: inventory_hostname in groups['swarm'][:number_of_managers]
+  tags: join_managers
+
+- name: Add workers to Docker Swarm
+  command: docker swarm join --token {{ join_token.stdout }} {{ groups['swarm'][0] }}:2377
+  when: inventory_hostname not in groups['swarm'][:number_of_managers]
+  tags: join_workers

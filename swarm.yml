@@ -1,0 +1,11 @@
+---
+
+- name: Create Docker Swarm
+  hosts: swarm
+  become: true
+  roles:
+    - role: docker
+    - role: docker_swarm
+      vars:
+        number_of_managers: 2
+
