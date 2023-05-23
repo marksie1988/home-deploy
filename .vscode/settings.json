@@ -1,3 +1,4 @@
 {
-    "docker.host": "ssh://marksie1988@172.16.20.7"
+    "docker.host": "ssh://marksie1988@172.16.20.7",
+    "ansible.python.interpreterPath": "/usr/bin/python3"
 }
