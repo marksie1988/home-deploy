@@ -1,9 +1,9 @@
 ---
-
 - name: Initialize Docker Swarm
-  command: docker swarm init  --advertise-addr "{{ swarm_cluster_ip }}"
+  command: docker swarm init --advertise-addr "{{ swarm_cluster_ip }}"
   args:
     creates: /var/run/docker/swarm/control_token
+  register: swarm_init_output
   tags: init_swarm
 
 - name: Retrieve Swarm join token
@@ -13,11 +13,11 @@
   tags: get_join_token
 
 - name: Add managers to Docker Swarm
-  command: docker swarm join --token {{ join_token.stdout }} {{ groups['swarm'][0] }}:2377
-  when: inventory_hostname in groups['swarm'][:number_of_managers]
+  command: docker swarm join --token {{ join_token.stdout }} {{ swarm_init_output.stdout_lines[0] }}
+  when: inventory_hostname == groups['swarm'][0]
   tags: join_managers
 
 - name: Add workers to Docker Swarm
-  command: docker swarm join --token {{ join_token.stdout }} {{ groups['swarm'][0] }}:2377
-  when: inventory_hostname not in groups['swarm'][:number_of_managers]
+  command: docker swarm join --token {{ join_token.stdout }} {{ swarm_init_output.stdout_lines[0] }}
+  when: inventory_hostname != groups['swarm'][0]
   tags: join_workers
