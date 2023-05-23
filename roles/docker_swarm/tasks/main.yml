@@ -5,6 +5,7 @@
     creates: /var/run/docker/swarm/control_token
   register: swarm_init_output
   tags: init_swarm
+  when: swarm_init_output is not defined
 
 - name: Retrieve Swarm join token
   command: docker swarm join-token -q worker
