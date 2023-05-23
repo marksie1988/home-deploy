@@ -1,6 +1,7 @@
 ---
+
 - name: Initialize Docker Swarm
-  command: docker swarm init
+  command: docker swarm init  --advertise-addr "{{ swarm_cluster_ip }}"
   args:
     creates: /var/run/docker/swarm/control_token
   tags: init_swarm

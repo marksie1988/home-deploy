@@ -4,3 +4,4 @@
 
 motd_modification: true
 motd_server_purpose: Docker Swarm
+

@@ -8,4 +8,37 @@
     - role: docker_swarm
       vars:
         number_of_managers: 2
+        swarm_cluster_ip: 172.16.20.50
+
+- name: Mount dockerfiles volume
+  ansible.posix.mount:
+    src: 172.16.60.2:/export/dockerfiles
+    path: /mnt/nfs/dockerfiles
+    opts: auto,bg,nolock,noatime,actimeo=100
+    state: mounted
+    fstype: nfs
+
+- name: Mount TV volume
+  ansible.posix.mount:
+    src: 172.16.60.2:/export/tv
+    path: /mnt/nfs/media/tv
+    opts: auto,bg,nolock,noatime,actimeo=100
+    state: mounted
+    fstype: nfs
+
+- name: Mount Movies volume
+  ansible.posix.mount:
+    src: 172.16.60.2:/export/movies
+    path: /mnt/nfs/media/movies
+    opts: auto,bg,nolock,noatime,actimeo=100
+    state: mounted
+    fstype: nfs
+
+- name: Mount Deluge downloads volume
+  ansible.posix.mount:
+    src: 192.168.10.2:/home/deluge/downloads/
+    path: /mnt/nfs/deluge/downloads
+    opts: auto,bg,nolock,noatime,actimeo=100
+    state: mounted
+    fstype: nfs
 
