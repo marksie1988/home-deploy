@@ -1,24 +1,28 @@
 ---
 - name: Initialize Docker Swarm
   command: docker swarm init --advertise-addr "{{ swarm_cluster_ip }}"
-  args:
-    creates: /var/run/docker/swarm/control_token
-  register: swarm_init_output
-  tags: init_swarm
-  when: swarm_init_output is not defined
-
-- name: Retrieve Swarm join token
-  command: docker swarm join-token -q worker
+  register: swarm_init
   changed_when: false
-  register: join_token
-  tags: get_join_token
+  failed_when: "'already exists' not in swarm_init.stderr"
 
-- name: Add managers to Docker Swarm
-  command: docker swarm join --token {{ join_token.stdout }} {{ swarm_init_output.stdout_lines[0] }}
-  when: inventory_hostname == groups['swarm'][0]
-  tags: join_managers
+- name: Get Swarm Manager Token
+  command: docker swarm join-token manager -q
+  register: manager_token
 
-- name: Add workers to Docker Swarm
-  command: docker swarm join --token {{ join_token.stdout }} {{ swarm_init_output.stdout_lines[0] }}
-  when: inventory_hostname != groups['swarm'][0]
-  tags: join_workers
+- name: Get Swarm Worker Token
+  command: docker swarm join-token worker -q
+  register: worker_token
+
+- name: Add Swarm Managers
+  command: docker swarm join --token "{{ manager_token.stdout }}" "{{ swarm_init.stdout_lines[1] }}"
+  when: inventory_hostname in groups['all'][0:number_of_managers]
+  register: join_manager
+  changed_when: false
+  failed_when: "not join_manager.stdout"
+
+- name: Add Swarm Workers
+  command: docker swarm join --token "{{ worker_token.stdout }}" "{{ swarm_init.stdout_lines[1] }}"
+  when: inventory_hostname not in groups['all'][0:number_of_managers]
+  register: join_worker
+  changed_when: false
+  failed_when: "not join_worker.stdout"
