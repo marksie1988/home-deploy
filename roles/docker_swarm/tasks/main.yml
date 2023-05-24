@@ -5,7 +5,7 @@
   changed_when: false
 
 - name: Initialize Docker Swarm
-  command: docker swarm init --advertise-addr "{{ swarm_cluster_ip }}"
+  command: docker swarm init --advertise-addr "{{ hostvars[groups['swarm'][0]].ansible_default_ipv4.address }}"
   register: swarm_init
   changed_when: "'Swarm initialized' in swarm_init.stdout and swarm_status.stdout == 'inactive'"
   when: inventory_hostname == groups['swarm'][0] and swarm_status.stdout != 'active'
@@ -34,17 +34,10 @@
     swarm_worker_token: "{{ worker_token.stdout }}"
   when: worker_token is defined
 
-- name: Pause to get some sensitive input
-  ansible.builtin.pause:
-    prompt: "Enter a secret"
-
 - name: Add Swarm Managers
   command: docker swarm join --token "{{ swarm_manager_token }}" "{{ hostvars[groups['swarm'][0]].ansible_default_ipv4.address }}"
   when: inventory_hostname != groups['swarm'][0] and inventory_hostname in groups['swarm'][:number_of_managers] and swarm_status.stdout != "active"
   changed_when: false
-  register: manager
-
-- debug: msg="{{ manager.stdout }}"
 
 - name: Add Swarm Workers
   command: docker swarm join --token "{{ swarm_worker_token }}" "{{ hostvars[groups['swarm'][0]].ansible_default_ipv4.address }}"

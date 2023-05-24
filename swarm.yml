@@ -8,7 +8,6 @@
     - role: docker_swarm
       vars:
         number_of_managers: 2
-        swarm_cluster_ip: 172.16.20.50
   tasks:
     - name: Mount dockerfiles volume
       ansible.posix.mount:
