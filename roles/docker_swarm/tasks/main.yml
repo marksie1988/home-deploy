@@ -7,7 +7,7 @@
 - name: Initialize Docker Swarm
   command: docker swarm init --advertise-addr "{{ swarm_cluster_ip }}"
   register: swarm_init
-  changed_when: false
+  changed_when: "'Swarm initialized' in swarm_init.stdout and swarm_status.stdout == 'inactive'"
   failed_when: swarm_status.stdout != "inactive" or swarm_init.stdout.find("already a part of this swarm") == -1
 
 - name: Get Swarm Manager Token
