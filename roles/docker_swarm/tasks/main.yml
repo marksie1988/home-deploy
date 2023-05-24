@@ -8,7 +8,7 @@
   command: docker swarm init --advertise-addr "{{ swarm_cluster_ip }}"
   register: swarm_init
   changed_when: "'Swarm initialized' in swarm_init.stdout and swarm_status.stdout == 'inactive'"
-  when: inventory_hostname == groups['swarm'][0]
+  when: inventory_hostname == groups['swarm'][0] and swarm_status.stdout != "active"
 
 - name: Get Swarm Manager Token
   command: docker swarm join-token manager -q
