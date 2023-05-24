@@ -35,11 +35,11 @@
   when: worker_token is defined
 
 - name: Add Swarm Managers
-  command: docker swarm join --token "{{ swarm_manager_token.stdout }}" "{{ swarm_cluster_ip }}"
+  command: docker swarm join --token "{{ swarm_manager_token }}" "{{ swarm_cluster_ip }}"
   when: inventory_hostname != groups['swarm'][0] and inventory_hostname in groups['swarm'][:number_of_managers] and swarm_status.stdout != "active"
   changed_when: false
 
 - name: Add Swarm Workers
-  command: docker swarm join --token "{{ swarm_worker_token.stdout }}" "{{ swarm_cluster_ip }}"
+  command: docker swarm join --token "{{ swarm_worker_token }}" "{{ swarm_cluster_ip }}"
   when: inventory_hostname not in groups['swarm'][:number_of_managers] and swarm_init.changed and swarm_status.stdout != "active"
   changed_when: false
