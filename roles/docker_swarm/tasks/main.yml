@@ -25,13 +25,9 @@
 - name: Add Swarm Managers
   command: docker swarm join --token "{{ manager_token.stdout }}" "{{ swarm_cluster_ip }}"
   when: inventory_hostname != groups['swarm'][0] and inventory_hostname in groups['swarm'][:number_of_managers] and swarm_status.stdout != "active"
-  register: join_manager
   changed_when: false
-  failed_when: "not join_manager.stdout"
 
 - name: Add Swarm Workers
   command: docker swarm join --token "{{ worker_token.stdout }}" "{{ swarm_cluster_ip }}"
   when: inventory_hostname not in groups['swarm'][:number_of_managers] and swarm_init.changed and swarm_status.stdout != "active"
-  register: join_worker
   changed_when: false
-  failed_when: "not join_worker.stdout"
