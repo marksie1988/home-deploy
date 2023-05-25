@@ -4,6 +4,10 @@
     name: nfs-common
     state: present
 
+- name: Install jsondiff python package
+  ansible.builtin.pip:
+    name: jsondiff
+
 - name: Copy portainer compose file
   ansible.builtin.copy:
     src: portainer-stack.yml
