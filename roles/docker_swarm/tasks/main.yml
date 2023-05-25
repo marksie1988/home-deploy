@@ -43,3 +43,7 @@
   command: docker swarm join --token "{{ swarm_worker_token }}" "{{ hostvars[groups['swarm'][0]].ansible_default_ipv4.address }}"
   when: inventory_hostname not in groups['swarm'][:number_of_managers] and swarm_init.changed and swarm_status.stdout != "active"
   changed_when: false
+
+- name: Install portainer if true
+  ansible.builtin.include_tasks: "portainer.yaml"
+  when: install_portainer is defined and inventory_hostname == groups['swarm'][0]

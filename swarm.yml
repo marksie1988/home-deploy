@@ -9,10 +9,6 @@
       vars:
         number_of_managers: 2
   tasks:
-    - name: Install nfs-common
-      ansible.builtin.package:
-        name: nfs-common
-        state: present
 
     - name: Mount dockerfiles volume
       ansible.posix.mount:
@@ -45,4 +41,3 @@
         opts: auto,bg,nolock,noatime,actimeo=100
         state: mounted
         fstype: nfs
-
