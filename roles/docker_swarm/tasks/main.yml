@@ -45,5 +45,5 @@
   changed_when: false
 
 - name: Install portainer if true
-  ansible.builtin.include_tasks: "portainer.yaml"
+  ansible.builtin.include_tasks: portainer.yml
   when: install_portainer is defined and inventory_hostname == groups['swarm'][0]
