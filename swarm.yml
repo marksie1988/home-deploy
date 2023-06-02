@@ -21,7 +21,7 @@
         name: "{{ gluster_brick_name }}"
         brick: "{{ gluster_brick_dir }}"
         replicas: 2
-        cluster: "{{ groups.gluster | join(',') }}"
+        cluster: "{{ groups.swarm | join(',') }}"
         host: "{{ inventory_hostname }}"
         force: yes
       run_once: true
