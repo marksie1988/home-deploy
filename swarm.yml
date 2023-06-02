@@ -4,40 +4,79 @@
   hosts: swarm
   become: true
   roles:
+    - role: geerlingguy.glusterfs
     - role: docker
-    - role: docker_swarm
       vars:
         number_of_managers: 2
   tasks:
+    - name: Ensure Gluster brick and mount directories exist.
+      file: "path={{ item }} state=directory mode=0775"
+      with_items:
+        - "{{ gluster_brick_dir }}"
+        - "{{ gluster_mount_dir }}"
 
-    - name: Mount dockerfiles volume
-      ansible.posix.mount:
-        src: 172.16.60.2:/export/dockerfiles
-        path: /mnt/nfs/dockerfiles
-        opts: auto,bg,nolock,noatime,actimeo=100
-        state: mounted
-        fstype: nfs
+    - name: Configure Gluster volume.
+      gluster_volume:
+        state: present
+        name: "{{ gluster_brick_name }}"
+        brick: "{{ gluster_brick_dir }}"
+        replicas: 2
+        cluster: "{{ groups.gluster | join(',') }}"
+        host: "{{ inventory_hostname }}"
+        force: yes
+      run_once: true
 
-    - name: Mount TV volume
-      ansible.posix.mount:
-        src: 172.16.60.2:/export/tv
-        path: /mnt/nfs/media/tv
-        opts: auto,bg,nolock,noatime,actimeo=100
+    - name: Ensure Gluster volume is mounted.
+      mount:
+        name: "{{ gluster_mount_dir }}"
+        src: "{{ inventory_hostname }}:/{{ gluster_brick_name }}"
+        fstype: glusterfs
+        opts: "defaults,_netdev"
         state: mounted
-        fstype: nfs
 
-    - name: Mount Movies volume
-      ansible.posix.mount:
-        src: 172.16.60.2:/export/movies
-        path: /mnt/nfs/media/movies
-        opts: auto,bg,nolock,noatime,actimeo=100
-        state: mounted
-        fstype: nfs
+    - name: Init a new swarm with default parameters
+      community.docker.docker_swarm:
+        state: present
+      when: inventory_hostname == groups['swarm'][0]
 
-    - name: Mount Deluge downloads volume
-      ansible.posix.mount:
-        src: 192.168.10.2:/home/deluge/downloads/
-        path: /mnt/nfs/deluge/downloads
-        opts: auto,bg,nolock,noatime,actimeo=100
-        state: mounted
-        fstype: nfs
+    - name: Get Swarm Manager Token
+      command: docker swarm join-token manager -q
+      register: manager_token
+      changed_when: false
+      when: inventory_hostname == groups['swarm'][0]
+      run_once: true
+
+    - name: Set Swarm Manager Token as Fact
+      set_fact:
+        swarm_manager_token: "{{ manager_token.stdout }}"
+      when: manager_token is defined
+
+    - name: Get Swarm Worker Token
+      command: docker swarm join-token worker -q
+      register: worker_token
+      changed_when: false
+      when: inventory_hostname == groups['swarm'][0]
+      run_once: true
+
+    - name: Set Swarm Worker Token as Fact
+      set_fact:
+        swarm_worker_token: "{{ worker_token.stdout }}"
+      when: worker_token is defined
+
+    - name: Add manager nodes
+      community.docker.docker_swarm:
+        state: join
+        join_token: "{{ manager_token.stdout }}"
+        remote_addrs: [ "{{ hostvars[groups['swarm'][0]].ansible_default_ipv4.address }}" ]
+      when: inventory_hostname != groups['swarm'][0] and inventory_hostname in groups['swarm'][:number_of_managers]
+
+    - name: Add worker nodes
+      community.docker.docker_swarm:
+        state: join
+        join_token: "{{ worker_token.stdout }}"
+        remote_addrs: [ "{{ hostvars[groups['swarm'][0]].ansible_default_ipv4.address }}" ]
+      when: inventory_hostname not in groups['swarm'][:number_of_managers]
+
+    - name: Install portainer if true
+      ansible.builtin.include_tasks: portainer.yml
+      when: install_portainer is defined and inventory_hostname == groups['swarm'][0]

@@ -6,3 +6,8 @@ motd_modification: true
 motd_server_purpose: Docker Swarm
 
 install_portainer: true
+
+# Gluster configuration.
+gluster_mount_dir: /mnt/gluster
+gluster_brick_dir: /srv/gluster/brick
+gluster_brick_name: gluster
