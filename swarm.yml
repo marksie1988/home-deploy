@@ -16,12 +16,12 @@
         - "{{ gluster_mount_dir }}"
 
     - name: Configure Gluster volume.
-      gluster_volume:
+      gluster.gluster.gluster_volume::
         state: present
         name: "{{ gluster_brick_name }}"
         brick: "{{ gluster_brick_dir }}"
         replicas: 2
-        cluster: "{{ groups.swarm | join(',') }}"
+        cluster: "{{ groups['swarm'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
         host: "{{ ansible_default_ipv4.address }}"
         force: yes
       run_once: true
