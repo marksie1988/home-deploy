@@ -6,11 +6,12 @@
   roles:
     - role: geerlingguy.glusterfs
     - role: docker
-      vars:
-        number_of_managers: 2
   tasks:
     - name: Ensure Gluster brick and mount directories exist.
-      file: "path={{ item }} state=directory mode=0775"
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: 0775
       with_items:
         - "{{ gluster_brick_dir }}"
         - "{{ gluster_mount_dir }}"
