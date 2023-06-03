@@ -22,14 +22,14 @@
         brick: "{{ gluster_brick_dir }}"
         replicas: 2
         cluster: "{{ groups.swarm | join(',') }}"
-        host: "{{ inventory_hostname }}"
+        host: "{{ ansible_default_ipv4.address }}"
         force: yes
       run_once: true
 
     - name: Ensure Gluster volume is mounted.
       mount:
         name: "{{ gluster_mount_dir }}"
-        src: "{{ inventory_hostname }}:/{{ gluster_brick_name }}"
+        src: "{{ ansible_default_ipv4.address }}:/{{ gluster_brick_name }}"
         fstype: glusterfs
         opts: "defaults,_netdev"
         state: mounted
