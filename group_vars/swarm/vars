@@ -14,5 +14,5 @@ number_of_managers: 2
 
 gluster_mount_dir: /mnt/gluster
 gluster_brick_dir: /srv/gluster/brick
-gluster_brick_name: gluster
+gluster_brick_name: docker_volume
 glusterfs_ppa_version: "9"

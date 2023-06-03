@@ -11,8 +11,6 @@
       file:
         path: "{{ item }}"
         state: directory
-        owner: root
-        group: www-data
         mode: 0775
       with_items:
         - "{{ gluster_brick_dir }}"
