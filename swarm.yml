@@ -16,7 +16,7 @@
         - "{{ gluster_mount_dir }}"
 
     - name: Configure Gluster volume.
-      gluster.gluster.gluster_volume::
+      gluster_volume::
         state: present
         name: "{{ gluster_brick_name }}"
         brick: "{{ gluster_brick_dir }}"
