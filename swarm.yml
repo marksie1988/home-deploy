@@ -21,7 +21,7 @@
         state: present
         name: "{{ gluster_brick_name }}"
         brick: "{{ gluster_brick_dir }}"
-        replicas: 2
+        replicas: 3
         cluster: "{{ groups['swarm'] | map('extract', hostvars, ['ansible_host']) | join(',') }}"
         host: "{{ ansible_default_ipv4.address }}"
         force: yes
