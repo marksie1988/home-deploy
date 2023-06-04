@@ -1,5 +1,6 @@
 ---
 
+
 - name: Create Docker Swarm
   hosts: swarm
   become: true
@@ -7,6 +8,19 @@
     - role: geerlingguy.glusterfs
     - role: docker
   tasks:
+    - name: Install required packages
+      ansible.builtin.package:
+        name:
+          - nfs-common
+          - python3-pip
+        state: present
+
+    - name: Install required python packages
+      ansible.builtin.pip:
+        name:
+          - jsondiff
+          - docker
+
     - name: Ensure Gluster brick and mount directories exist.
       file:
         path: "{{ item }}"
@@ -78,6 +92,16 @@
         remote_addrs: [ "{{ hostvars[groups['swarm'][0]].ansible_default_ipv4.address }}" ]
       when: inventory_hostname not in groups['swarm'][:number_of_managers]
 
-    - name: Install portainer if true
-      ansible.builtin.include_tasks: portainer.yml
-      when: install_portainer is defined and inventory_hostname == groups['swarm'][0]
+
+
+    - name: Copy portainer compose file
+      ansible.builtin.copy:
+        src: portainer-stack.yml
+        dest: /opt/portainer-stack.yml
+
+    - name: Deploy portainer stack
+      community.docker.docker_stack:
+        state: present
+        name: portainer
+        compose:
+          - /opt/portainer-stack.yml
