@@ -40,5 +40,5 @@ volumes:
   portainer_data:
     driver_opts:
       type: "nfs"
-      o: "addr=172.16.60.2,nolock,soft,rw,auto,noatime,timeo=100"
+      o: "addr=172.16.60.2"
       device: ":/export/dockerfiles/portainer/data"
