@@ -92,8 +92,6 @@
         remote_addrs: [ "{{ hostvars[groups['swarm'][0]].ansible_default_ipv4.address }}" ]
       when: inventory_hostname not in groups['swarm'][:number_of_managers]
 
-
-
     - name: Copy portainer compose file
       ansible.builtin.copy:
         src: portainer-stack.yml
@@ -105,3 +103,4 @@
         name: portainer
         compose:
           - /opt/portainer-stack.yml
+      when: inventory_hostname == groups['swarm'][0]
