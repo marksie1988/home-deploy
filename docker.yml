@@ -1,0 +1,24 @@
+---
+
+- name: Create Docker Host
+  hosts: swarm
+  become: true
+  roles:
+    - role: docker
+  tasks:
+    - name: Install required packages
+      ansible.builtin.package:
+        name:
+          - nfs-common
+          - python3-pip
+        state: present
+    - name: Copy portainer compose file
+      ansible.builtin.copy:
+        src: portainer-stack.yml
+        dest: /opt/portainer-stack.yml
+    - name: Deploy portainer stack
+      community.docker.docker_stack:
+        state: present
+        name: portainer
+        compose:
+          - /opt/portainer-stack.yml
