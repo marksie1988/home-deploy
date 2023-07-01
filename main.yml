@@ -24,4 +24,4 @@
 
 - import_playbook: plex.yml
 
-- import_playbook: swarm.yml
+- import_playbook: docker.yml
