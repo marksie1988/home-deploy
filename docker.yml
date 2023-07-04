@@ -11,8 +11,13 @@
         name:
           - nfs-common
           - python3-pip
-          - jsondiff
         state: present
+
+    - name: Install required python packages
+      ansible.builtin.pip:
+        name:
+          - jsondiff
+          - docker
     - name: Copy portainer compose file
       ansible.builtin.copy:
         src: portainer-stack.yml
