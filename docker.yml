@@ -18,6 +18,7 @@
         name:
           - jsondiff
           - docker
+          - docker-compose
     - name: Copy portainer compose file
       ansible.builtin.copy:
         src: portainer-stack.yml
