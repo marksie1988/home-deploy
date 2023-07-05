@@ -26,5 +26,6 @@
     - name: Deploy portainer stack
       community.docker.docker_compose:
         state: present
+        project_src: /opt
         files:
-          - /opt/portainer-stack.yml
+          - portainer-stack.yml
