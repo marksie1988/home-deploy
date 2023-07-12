@@ -10,6 +10,16 @@ services:
       - portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    labels:
+      - homepage.group=//Infrastructure
+      - homepage.name=Portainer
+      - homepage.icon=portainer.png
+      - homepage.href=https://172.16.20.50:9443
+      - homepage.description=Docker Container Manager
+      - homepage.widget.type=portainer
+      - homepage.widget.url=https://172.16.20.50:9443
+      - homepage.widget.env=2
+      - homepage.widget.key=ptr_JfbRS6oMqFfQZHkGjtnbDcc9GV/WK1lQjuLgoAHyPc4=
 
 volumes:
   portainer_data:
