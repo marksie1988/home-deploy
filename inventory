@@ -19,3 +19,6 @@ td-prx1 ansible_host=172.16.50.10
 
 [docker]
 td-dkr1 ansible_host=172.16.20.50
+
+[devcontainer]
+td-dev1 ansible_host=172.16.20.7

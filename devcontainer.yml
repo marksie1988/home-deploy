@@ -1,0 +1,31 @@
+---
+
+- name: Create Dev Server
+  hosts: devcontainer
+  become: true
+  roles:
+    - role: docker
+  tasks:
+    - name: Install required packages
+      ansible.builtin.package:
+        name:
+          - nfs-common
+          - python3-pip
+        state: present
+
+    - name: Install required python packages
+      ansible.builtin.pip:
+        name:
+          - jsondiff
+          - docker
+          - docker-compose
+
+    - name: Copy marksie1988 SSH Key
+      ansible.builtin.copy:
+        content: "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='priv_key') }}"
+        dest: /home/marksie1988/.ssh/id_ed25519
+        group: marksie1988
+        owner: marksie1988
+        directory_mode: 0644
+        mode: 0600
+      become: true
