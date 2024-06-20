@@ -47,6 +47,20 @@ If updates have been added to submodules run:
 git submodule foreach git pull origin master
 ```
 
+### Install One Password
+
+Add acocunt
+
+```shell
+op signin add
+```
+
+Login
+
+```shell
+eval $(op signin)
+```
+
 ### Install WebHook
 
 ```shell

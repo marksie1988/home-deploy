@@ -8,15 +8,11 @@ roles:
   - name: totaldebug.certbot
   - name: totaldebug.minecraft
   - name: geerlingguy.security
-    version: 2.2.0
   - name: geerlingguy.glusterfs
   - name: geerlingguy.docker
-    version: 6.0.1
   - name: totaldebug.minecraft
   - name: geerlingguy.nfs
-    version: 2.0.0
   - name: githubixx.ansible_role_wireguard
-    version: 10.0.0
 
 collections:
   - name: community.general

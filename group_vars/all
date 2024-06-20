@@ -13,13 +13,12 @@ _default_users:
   - username: marksie1988
     uid: 2001
     password: "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='password') }}"
-    groups: ["sudo"]
+    groups: ["sudo", "docker"]
     ssh_key:
       - "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='pub_key') }}"
     users_default_shell: /usr/local/bin/zsh
 
 users: "{{ _default_users + (_specific_users | default([])) }}"
-
 
 # Geerlingguy.security
 security_ssh_allowed_users:

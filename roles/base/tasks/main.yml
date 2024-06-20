@@ -1,10 +1,10 @@
----
-- name: Wait for cloud-init to complete
-  shell: /usr/bin/cloud-init status --wait
-  register: cloud_init_install
-  retries: 60
+- name: Wait for cloud init to finish
+  community.general.cloud_init_data_facts:
+    filter: status
+  register: res
+  until: "res.cloud_init_data_facts.status.v1.stage is defined and not res.cloud_init_data_facts.status.v1.stage"
+  retries: 50
   delay: 5
-  until: cloud_init_install is success
 
 - name: install updates (CentOS)
   tags: always
@@ -25,7 +25,7 @@
 - name: Install zsh, curl & unzip
   ansible.builtin.package:
     name:
-      - zsh
-      - curl
-      - unzip
+    - zsh
+    - curl
+    - unzip
     state: present
