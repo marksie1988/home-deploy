@@ -28,7 +28,7 @@
         dest: /etc/nginx/conf.d/
         force: true
         accept_hostkey: true
-        ssh_opts: /root/.ssh/github
+        key_file: /root/.ssh/github
       become: true
     - name: Change permission on deploy-hook.sh file
       ansible.builtin.file:
