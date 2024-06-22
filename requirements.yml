@@ -2,7 +2,6 @@
 roles:
   - name: totaldebug.users
   - name: totaldebug.deluge
-  - name: totaldebug.hassio
   - name: totaldebug.motd
   - name: totaldebug.webhook
   - name: totaldebug.certbot
@@ -16,5 +15,4 @@ roles:
 
 collections:
   - name: community.general
-  - name: totaldebug.hassio_cli
-    version: 3.0.0
+  - name: damex.plex

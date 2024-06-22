@@ -1,2 +1,34 @@
-- hosts: plex
-
+- name: Create Plex Server
+  hosts: plex
+  become: true
+  collections: 
+    - damex.plex
+  roles:
+    - plex
+  tasks:
+    - name: Install required packages
+      ansible.builtin.package:
+        name:
+          - nfs-common
+        state: present
+    - name: Create media mount folder
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      with_items: 
+        - /mnt/media/tv
+        - /mnt/media/movies
+    - name: Mount TV Series
+      ansible.posix.mount:
+        path: /mnt/media/tv
+        src: 172.16.60.2:/export/tv
+        opts: rw,sync,hard
+        state: mounted
+        fstype: nfs
+    - name: Mount Movies
+      ansible.posix.mount:
+        path: /mnt/media/movies
+        src: 172.16.60.2:/export/movies
+        opts: rw,sync,hard
+        state: mounted
+        fstype: nfs

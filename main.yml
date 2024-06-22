@@ -14,7 +14,7 @@
 
 - import_playbook: backups.yml
 
-- import_playbook: hassio.yml
+  #- import_playbook: hassio.yml
 
 - import_playbook: tor.yml
 
@@ -24,6 +24,6 @@
 
 - import_playbook: plex.yml
 
-- import_playbook: docker.yml
+  #- import_playbook: docker.yml
 
-- import_playbook: devcontainer.yml
+  #- import_playbook: devcontainer.yml

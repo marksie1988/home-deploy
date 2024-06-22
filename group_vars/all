@@ -13,7 +13,7 @@ _default_users:
   - username: marksie1988
     uid: 2001
     password: "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='password') }}"
-    groups: ["sudo", "docker"]
+    groups: ["sudo"]
     ssh_key:
       - "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='pub_key') }}"
     users_default_shell: /usr/local/bin/zsh
