@@ -3,9 +3,6 @@
   hosts: devcontainer
   become: true
   tasks:
-  - name: Add podman PPA
-    ansible.builtin.apt_repository:
-      repo: 'ppa:projectatomic/ppa'
   - name: Install podman suite of tools
     ansible.builtin.package:
       name: "{{ item }}"
@@ -13,11 +10,3 @@
     with_items:
     - podman
     - podman-docker
-    - podman-gvproxy
-    - podman-netavark
-    - python3-podman-compose
-    - uidmap
-    - containernetworking-podman-machine
-    - containernetworking-plugins
-    - containernetworking-dnsname
-
