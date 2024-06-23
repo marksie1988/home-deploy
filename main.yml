@@ -1,21 +1,17 @@
----
 - name: Configure all servers.
   hosts: all
   become: true
   become_method: sudo
   roles:
-    - base
-    - geerlingguy.security
-    - totaldebug.motd
-    - totaldebug.users
-    #- totaldebug.dotfiles
-
+  - base
+  - geerlingguy.security
+  - totaldebug.motd
+  - totaldebug.users
+  #- totaldebug.dotfiles
 - import_playbook: bastion.yml
 
 - import_playbook: backups.yml
-
   #- import_playbook: hassio.yml
-
 - import_playbook: tor.yml
 
 - import_playbook: minecraft.yml
@@ -23,7 +19,8 @@
 - import_playbook: proxy.yml
 
 - import_playbook: plex.yml
-
   #- import_playbook: docker.yml
+- import_playbook: devcontainer.yml
 
-  #- import_playbook: devcontainer.yml
+
+

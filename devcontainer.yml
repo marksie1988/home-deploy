@@ -3,9 +3,12 @@
   hosts: devcontainer
   become: true
   tasks:
+  - name: Add podman PPA
+  ansible.builtin.apt_repository:
+    repo: 'ppa:projectatomic/ppa'
   - name: Install podman suite of tools
     ansible.builtin.package:
-      name: "{{ items }}"
+      name: "{{ item }}"
       update_cache: yes
     with_items:
     - podman
