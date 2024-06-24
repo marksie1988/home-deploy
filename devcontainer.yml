@@ -7,6 +7,5 @@
   tasks:
     - name: Add marksie1988 to docker group
       ansible.builtin.user:
-        groups:
-          - docker
+        groups: docker
         append: true
