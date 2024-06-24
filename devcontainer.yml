@@ -2,11 +2,11 @@
 - name: Create Dev Server
   hosts: devcontainer
   become: true
+  roles:
+    - geerlingguy.docker
   tasks:
-  - name: Install podman suite of tools
-    ansible.builtin.package:
-      name: "{{ item }}"
-      update_cache: yes
-    with_items:
-    - podman
-    - podman-docker
+    - name: Add marksie1988 to docker group
+      ansible.builtin.user:
+        groups:
+          - docker
+        append: true
