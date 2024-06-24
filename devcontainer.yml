@@ -3,9 +3,10 @@
   hosts: devcontainer
   become: true
   roles:
-    - geerlingguy.docker
+  - geerlingguy.docker
   tasks:
-    - name: Add marksie1988 to docker group
-      ansible.builtin.user:
-        groups: docker
-        append: true
+  - name: Add marksie1988 to docker group
+    ansible.builtin.user:
+      name: marksie1988
+      groups: docker
+      append: true
