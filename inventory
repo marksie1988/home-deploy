@@ -27,8 +27,8 @@ td-dev1 ansible_host=172.16.20.7
 mp-plex01 ansible_host=172.16.1.100
 
 [rke]
-rke-server01 ansible_host=172.16.20.51
-rke-server02 ansible_host=172.16.20.52
-rke-server03 ansible_host=172.16.20.53
-rke-agent01 ansible_host=172.16.20.54
-rke-agent02 ansible_host=172.16.20.55
+rke-srv01 ansible_host=172.16.20.101
+rke-srv02 ansible_host=172.16.20.102
+rke-srv03 ansible_host=172.16.20.103
+rke-agnt01 ansible_host=172.16.20.104
+rke-agnt02 ansible_host=172.16.20.105

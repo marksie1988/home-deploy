@@ -7,7 +7,7 @@
   - geerlingguy.security
   - totaldebug.motd
   - totaldebug.users
-  #- totaldebug.dotfiles
+
 - import_playbook: bastion.yml
 
 - import_playbook: backups.yml
