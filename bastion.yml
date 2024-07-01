@@ -29,7 +29,7 @@
     - /mnt/media/movies
     - /mnt/downloads
     become: true
-  - name: Mount media NFS volume
+  - name: Mount tv NFS volume
     ansible.posix.mount:
       src: 172.16.60.2:/export/tv
       path: /mnt/media/tv
@@ -37,10 +37,18 @@
       state: mounted
       fstype: nfs
     become: true
-  - name: Mount media NFS volume
+  - name: Mount movies NFS volume
     ansible.posix.mount:
       src: 172.16.60.2:/export/movies
       path: /mnt/media/movies
+      opts: rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4
+      state: mounted
+      fstype: nfs
+    become: true
+  - name: Mount downloads NFS volume
+    ansible.posix.mount:
+      src: 192.168.10.2:/home/deluge/downloads
+      path: /mnt/downloads
       opts: rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4
       state: mounted
       fstype: nfs
