@@ -1,31 +1,30 @@
----
 
 - name: Create Docker Host
   hosts: docker
   become: true
   roles:
-    - role: docker
+  - geerlingguy.docker
   tasks:
-    - name: Install required packages
-      ansible.builtin.package:
-        name:
-          - nfs-common
-          - python3-pip
-        state: present
+  - name: Install required packages
+    ansible.builtin.package:
+      name:
+      - nfs-common
+      - python3-pip
+      state: present
 
-    - name: Install required python packages
-      ansible.builtin.pip:
-        name:
-          - jsondiff
-          - docker
-          - docker-compose
-    - name: Copy portainer compose file
-      ansible.builtin.copy:
-        src: portainer-stack.yml
-        dest: /opt/portainer-stack.yml
-    - name: Deploy portainer stack
-      community.docker.docker_compose:
-        state: present
-        project_src: /opt
-        files:
-          - portainer-stack.yml
+  - name: Install required python packages
+    ansible.builtin.pip:
+      name:
+      - jsondiff
+      - docker
+      - docker-compose
+  - name: Copy portainer compose file
+    ansible.builtin.copy:
+      src: portainer-stack.yml
+      dest: /opt/portainer-stack.yml
+  - name: Deploy portainer stack
+    community.docker.docker_compose:
+      state: present
+      project_src: /opt
+      files:
+      - portainer-stack.yml
