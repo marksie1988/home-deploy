@@ -1,0 +1,8 @@
+---
+_specific_users:
+  username: plex
+  uid: 1001
+  gid: 666
+  shell: "/usr/sbin/nologin"
+  groups: [render, video]
+  home: "/var/lib/plexmediaserver"
