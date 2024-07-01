@@ -1,18 +1,18 @@
----
 roles:
-  - name: totaldebug.users
-  - name: totaldebug.deluge
-  - name: totaldebug.motd
-  - name: totaldebug.webhook
-  - name: totaldebug.certbot
-  - name: totaldebug.minecraft
-  - name: geerlingguy.security
-  - name: geerlingguy.glusterfs
-  - name: geerlingguy.docker
-  - name: totaldebug.minecraft
-  - name: geerlingguy.nfs
-  - name: githubixx.ansible_role_wireguard
+- name: totaldebug.users
+- name: totaldebug.deluge
+- name: totaldebug.motd
+- name: totaldebug.webhook
+- name: totaldebug.certbot
+- name: totaldebug.minecraft
+- name: geerlingguy.security
+- name: geerlingguy.glusterfs
+- name: geerlingguy.docker
+- name: totaldebug.minecraft
+- name: geerlingguy.nfs
+- name: githubixx.ansible_role_wireguard
 
 collections:
-  - name: community.general
-  - name: damex.plex
+- name: community.general
+- name: damex.plex
+- name: ansible.posix
