@@ -1,45 +1,47 @@
----
 - hosts: bastion
 
   tasks:
-    - name: Copy marksie1988 SSH Key
-      ansible.builtin.copy:
-        content: "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='priv_key') }}"
-        dest: /home/marksie1988/.ssh/id_ed25519
-        group: marksie1988
-        owner: marksie1988
-        directory_mode: 0644
-        mode: 0600
-      become: true
-    - name: Install tmux
-      ansible.builtin.package:
-        name: tmux
-        state: present
-      become: true
-    - name: Install NFS Common
-      ansible.builtin.package:
-        name: nfs-common
-        state: present
-      become: true
-    - name: Make mount folders
-      ansible.builtin.file:
-        path: "{{ item }}"
-        state: directory
-      with_items:
-        - /mnt/media/tv
-        - /mnt/media/movies
-        - /mnt/downloads
-    - name: Mount media NFS volume
-      ansible.posix.mount:
-        src: 172.16.60.2:/export/tv
-        path: /mnt/media/tv
-        opts: rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4
-        state: mounted
-        fstype: nfs
-    - name: Mount media NFS volume
-      ansible.posix.mount:
-        src: 172.16.60.2:/export/movies
-        path: /mnt/media/movies
-        opts: rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4
-        state: mounted
-        fstype: nfs
+  - name: Copy marksie1988 SSH Key
+    ansible.builtin.copy:
+      content: "{{ lookup('community.general.onepassword', 'marksie1988_ssh', field='priv_key') }}"
+      dest: /home/marksie1988/.ssh/id_ed25519
+      group: marksie1988
+      owner: marksie1988
+      directory_mode: 0644
+      mode: 0600
+    become: true
+  - name: Install tmux
+    ansible.builtin.package:
+      name: tmux
+      state: present
+    become: true
+  - name: Install NFS Common
+    ansible.builtin.package:
+      name: nfs-common
+      state: present
+    become: true
+  - name: Make mount folders
+    ansible.builtin.file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+    - /mnt/media/tv
+    - /mnt/media/movies
+    - /mnt/downloads
+    become: true
+  - name: Mount media NFS volume
+    ansible.posix.mount:
+      src: 172.16.60.2:/export/tv
+      path: /mnt/media/tv
+      opts: rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4
+      state: mounted
+      fstype: nfs
+    become: true
+  - name: Mount media NFS volume
+    ansible.posix.mount:
+      src: 172.16.60.2:/export/movies
+      path: /mnt/media/movies
+      opts: rw,noatime,rsize=8192,wsize=8192,tcp,timeo=14,nfsvers=4
+      state: mounted
+      fstype: nfs
+    become: true
