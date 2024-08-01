@@ -9,28 +9,7 @@
     - apt-transport-https
     become: true
 
-  - name: Add source list
+  - name: Install
     command:
-      cmd: echo 'deb [ arch=amd64,arm64 ] https://www.ui.com/downloads/unifi/debian stable ubiquiti' | sudo tee /etc/apt/sources.list.d/100-ubnt-unifi.list
+      cmd: curl -sO https://get.glennr.nl/unifi/install/install_latest/unifi-latest.sh && bash unifi-latest.sh --skip --add-repository
     become: true
-
-  - name: Add Unifi GPG key
-    ansible.builtin.get_url:
-      url: https://dl.ui.com/unifi/unifi-repo.gpg
-      dest: /etc/apt/trusted.gpg.d/unifi-repo.gpg
-      mode: '0644'
-      force: true
-    become: true
-
-  - name: Install unifi
-    ansible.builtin.package:
-      update_cache: true
-      name: unifi
-      state: present
-    become: true
-
-  - name: Start service httpd, if not started
-    ansible.builtin.service:
-      name: unifi
-      state: started
-      enabled: true
