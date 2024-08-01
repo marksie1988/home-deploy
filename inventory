@@ -32,3 +32,6 @@ rke-srv02 ansible_host=172.16.20.102
 rke-srv03 ansible_host=172.16.20.103
 rke-agnt01 ansible_host=172.16.20.104
 rke-agnt02 ansible_host=172.16.20.105
+
+[unifi]
+mp-unifi01 ansible_host=172.16.20.18

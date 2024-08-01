@@ -23,3 +23,5 @@
 - import_playbook: devcontainer.yml
 
 - import_playbook: docker.yml
+
+- import_playbook: unifi.yaml
