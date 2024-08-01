@@ -14,10 +14,12 @@
       cmd: echo 'deb [ arch=amd64,arm64 ] https://www.ui.com/downloads/unifi/debian stable ubiquiti' | sudo tee /etc/apt/sources.list.d/100-ubnt-unifi.list
     become: true
 
-  - name: Add gpg key
-    ansible.builtin.apt_key:
-      keyserver: keyserver.ubuntu.com
-      id: 06E85760C0A52C50
+  - name: Add Unifi GPG key
+    ansible.builtin.get_url:
+      url: https://dl.ui.com/unifi/unifi-repo.gpg
+      dest: /etc/apt/trusted.gpg.d/unifi-repo.gpg
+      mode: '0644'
+      force: true
 
   - name: Install unifi
     ansible.builtin.package:
