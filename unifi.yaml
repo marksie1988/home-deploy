@@ -20,6 +20,7 @@
       dest: /etc/apt/trusted.gpg.d/unifi-repo.gpg
       mode: '0644'
       force: true
+    become: true
 
   - name: Install unifi
     ansible.builtin.package:
