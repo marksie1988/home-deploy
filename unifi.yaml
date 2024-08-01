@@ -24,6 +24,7 @@
 
   - name: Install unifi
     ansible.builtin.package:
+      update_cache: true
       name: unifi
       state: present
     become: true
